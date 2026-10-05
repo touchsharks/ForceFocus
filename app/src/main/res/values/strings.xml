@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ForceFocus</string>
+    <string name="accessibility_service_description">在专注期间识别前台应用，并阻止打开非当前任务白名单中的应用。</string>
+</resources>

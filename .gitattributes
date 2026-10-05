@@ -1,0 +1,18 @@
+# ForceFocus contains many binary art assets. Git LFS avoids inflating Git history.
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+*.webp filter=lfs diff=lfs merge=lfs -text
+
+# APKs belong in GitHub Releases, not ordinary commits. This rule is retained
+# for private remotes that intentionally version a base APK with Git LFS.
+*.apk filter=lfs diff=lfs merge=lfs -text
+
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.md text eol=lf
+
