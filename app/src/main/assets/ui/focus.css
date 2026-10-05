@@ -1,0 +1,257 @@
+.home-visual-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: visible;
+}
+
+.home.focus-clock-active #sidebarButton,
+.home.focus-clock-active #modeButton,
+.home.focus-clock-active #taskLeaves,
+.home.focus-clock-active #focusCircle,
+.home.focus-clock-active #timeBox {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.focus-clock-layer {
+    position: absolute;
+    display: none;
+    z-index: 2;
+    overflow: visible;
+    pointer-events: none;
+    touch-action: none;
+    overscroll-behavior: none;
+    transform-origin: 0 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.home.focus-clock-active .focus-clock-layer {
+    display: block;
+}
+
+.home.focus-clock-active {
+    touch-action: none;
+    overscroll-behavior: none;
+}
+
+.focus-silk,
+.focus-countdown-branch {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.focus-silk {
+    z-index: 1;
+}
+
+.focus-silk line {
+    fill: none;
+    stroke: rgba(73, 76, 59, 0.48);
+    stroke-width: 1.2px;
+    stroke-linecap: round;
+}
+
+.focus-whitelist-leaf {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    transform: none;
+    pointer-events: none;
+}
+
+.focus-whitelist-leaf.is-visible {
+    display: block;
+}
+
+.focus-whitelist-trace {
+    transition: filter 180ms ease-out;
+}
+
+.focus-whitelist-trace.is-near {
+    filter:
+        brightness(.90)
+        saturate(1.08)
+        drop-shadow(0 0 3px rgba(170, 181, 105, .16));
+}
+
+.focus-whitelist-trace.is-target {
+    filter:
+        brightness(.86)
+        saturate(1.12)
+        drop-shadow(0 0 2.5px rgba(170, 181, 105, .12));
+}
+
+@keyframes focusLeafTargetPulse {
+    0% {
+        filter: brightness(.90) saturate(1.08)
+            drop-shadow(0 0 2px rgba(170, 181, 105, .10));
+    }
+    42% {
+        filter: brightness(.82) saturate(1.18)
+            drop-shadow(0 0 4.5px rgba(170, 181, 105, .30));
+    }
+    100% {
+        filter: brightness(.86) saturate(1.12)
+            drop-shadow(0 0 2.5px rgba(170, 181, 105, .12));
+    }
+}
+
+.focus-whitelist-trace.play-target-pulse {
+    animation: focusLeafTargetPulse 420ms ease-out 1;
+}
+
+.focus-tick-ring {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.focus-clock-tick {
+    position: absolute;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    transform-origin: center center;
+    pointer-events: none;
+    transition: opacity 180ms;
+}
+
+.focus-zero-seed {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    overflow: hidden;
+    clip-path: polygon(50% 0, 94% 30%, 82% 82%, 50% 100%, 9% 77%, 5% 30%);
+    background: #3F5132;
+    transform: translate(-50%, -50%);
+}
+
+.focus-zero-seed > span {
+    position: absolute;
+    inset: 0;
+    display: block;
+    background: #66774B;
+    clip-path: polygon(50% 0, 100% 30%, 82% 82%, 50% 100%);
+}
+
+.focus-countdown-branch {
+    z-index: 3;
+    touch-action: none;
+    overscroll-behavior: none;
+}
+
+.focus-branch-shape,
+.focus-branch-knot {
+    fill: #4D5D40;
+    stroke: none;
+}
+
+.focus-spider-hit {
+    position: absolute;
+    z-index: 5;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    box-shadow: none;
+    opacity: 0;
+    pointer-events: auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.focus-branch-hit-path {
+    fill: none;
+    stroke: rgba(0, 0, 0, 0.001);
+    stroke-width: 250.4px;
+    stroke-linecap: butt;
+    stroke-linejoin: round;
+    pointer-events: stroke;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.focus-spider {
+    position: absolute;
+    z-index: 4;
+    display: block;
+    object-fit: contain;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+    pointer-events: none;
+    transition:
+        left 240ms cubic-bezier(.2, .8, .2, 1),
+        top 240ms cubic-bezier(.2, .8, .2, 1),
+        filter 160ms,
+        transform 160ms;
+}
+
+.focus-spider.is-dragging {
+    transition: filter 160ms, transform 160ms;
+}
+
+.focus-spider.is-candidate {
+    filter: brightness(1.08);
+    transform: translate(-50%, -50%) scale(0.96);
+}
+
+.focus-spider-hit {
+    transform: translate(-50%, -50%);
+}
+
+.focus-app-label {
+    position: absolute;
+    z-index: 5;
+    display: block;
+    color: rgba(70, 81, 58, 0.86);
+    white-space: nowrap;
+    line-height: 1;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 160ms, visibility 0ms linear 160ms;
+}
+
+.focus-app-label.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 160ms;
+}
+
+.focus-app-label-left {
+    text-align: left;
+    transform: translateY(-50%);
+}
+
+.focus-app-label-right {
+    text-align: right;
+    transform: translate(-100%, -50%);
+}
+
+.focus-task-title {
+    position: absolute;
+    z-index: 6;
+    display: block;
+    transform: none;
+    pointer-events: none;
+}

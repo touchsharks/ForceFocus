@@ -1,0 +1,17 @@
+"use strict";
+(()=>{
+const $=selector=>document.querySelector(selector);
+const home=$("#home"),page=$("#guidebookPage"),grid=$("#guidebookGrid"),back=$("#guidebookBack"),entry=$("#sidebarForestGuide"),drawer=$("#sidebarDrawer");
+let rendered=false;
+function rules(){const payload=window.FORCEFOCUS_FFTI_RULES;return payload&&Array.isArray(payload.rules)?payload.rules:[]}
+function sidebarBars(visible){try{if(window.NativeBridge&&typeof window.NativeBridge.setSidebarSystemBarsVisible==="function")window.NativeBridge.setSidebarSystemBarsVisible(Boolean(visible))}catch(_error){}}
+function readObject(key){try{const value=JSON.parse(localStorage.getItem(key));return value&&typeof value==="object"?value:{}}catch(_error){return{}}}
+function unlockedIds(){const ids=new Set(),history=readObject("forcefocus_ffti_history_v1"),awards=readObject("forcefocus_ffti_awards_v1");Object.keys(history).forEach(id=>{const entry=history[id];if(entry&&(Number(entry.count)>0||(Array.isArray(entry.unlockedDates)&&entry.unlockedDates.length)))ids.add(id)});Object.values(awards).forEach(value=>{if(Array.isArray(value))value.forEach(id=>ids.add(String(id)))});return ids}
+function render(force=false){if((rendered&&!force)||!grid)return;const unlocked=unlockedIds(),fragment=document.createDocumentFragment();rules().forEach(persona=>{if(!persona||!persona.id||!persona.name||!persona.image)return;const item=document.createElement("div");item.className=`guidebook-persona ${unlocked.has(persona.id)?"is-unlocked":"is-locked"}`;item.setAttribute("role","listitem");item.dataset.personaId=persona.id;const imageBox=document.createElement("div");imageBox.className="guidebook-persona-image";const image=document.createElement("img");image.src=persona.image;image.alt="";image.loading="eager";image.decoding="sync";image.draggable=false;imageBox.appendChild(image);const name=document.createElement("span");name.className="guidebook-persona-name";name.textContent=persona.name;const condition=document.createElement("span");condition.className="guidebook-persona-condition";condition.textContent=String(persona.conditionText||"");condition.title=condition.textContent;item.append(imageBox,name,condition);fragment.appendChild(item)});grid.replaceChildren(fragment);rendered=true}
+function refreshUnlocks(){try{if(!window.ForceFocusData||typeof window.ForceFocusData.settleFFTIDate!=="function"||typeof window.ForceFocusData.yesterdayKey!=="function")return;Promise.resolve(window.ForceFocusData.settleFFTIDate(window.ForceFocusData.yesterdayKey())).then(()=>render(true)).catch(()=>render(true))}catch(_error){render(true)}}
+function isOpen(){return Boolean(home&&home.classList.contains("guidebook-page-open"))}
+function open(){if(!home||!page)return;render();refreshUnlocks();sidebarBars(false);home.classList.add("guidebook-page-open");page.setAttribute("aria-hidden","false");if(drawer)drawer.setAttribute("aria-hidden","true");requestAnimationFrame(()=>{if(grid)grid.scrollTop=0})}
+function close(){if(!home||!page)return;home.classList.remove("guidebook-page-open");page.setAttribute("aria-hidden","true");if(drawer)drawer.setAttribute("aria-hidden","false");sidebarBars(true);if(entry)entry.focus({preventScroll:true})}
+function init(){if(!home||!page||!grid||!back||!entry)return;entry.addEventListener("click",event=>{event.stopPropagation();open()});back.addEventListener("click",event=>{event.stopPropagation();close()})}
+window.ForceFocusGuidebook=Object.freeze({open,close,isOpen});document.addEventListener("DOMContentLoaded",init,{once:true});
+})();

@@ -1,0 +1,3146 @@
+[
+  {
+    "index": 0,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      79,
+      213,
+      307,
+      483
+    ],
+    "greenBBox": [
+      77,
+      215,
+      299,
+      512
+    ],
+    "brownWidth": 228,
+    "brownHeight": 270,
+    "greenWidth": 222,
+    "greenHeight": 297,
+    "greenScaleX": 1.027027,
+    "greenScaleY": 0.909091,
+    "brownCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        79,
+        213,
+        307,
+        483
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        77,
+        215,
+        299,
+        512
+      ]
+    },
+    "placement": {
+      "renderWidth": 554,
+      "renderHeight": 656,
+      "left": 83,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 162520,
+    "alphaIdentical": true,
+    "sourceGroup": 1,
+    "gridRow": 0,
+    "gridColumn": 0
+  },
+  {
+    "index": 1,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      44,
+      240,
+      324,
+      483
+    ],
+    "greenBBox": [
+      45,
+      242,
+      310,
+      512
+    ],
+    "brownWidth": 280,
+    "brownHeight": 243,
+    "greenWidth": 265,
+    "greenHeight": 270,
+    "greenScaleX": 1.056604,
+    "greenScaleY": 0.9,
+    "brownCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        44,
+        240,
+        324,
+        483
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        45,
+        242,
+        310,
+        512
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 604,
+      "left": 12,
+      "top": 64,
+      "baselineY": 668
+    },
+    "alphaPixels": 210026,
+    "alphaIdentical": true,
+    "sourceGroup": 1,
+    "gridRow": 0,
+    "gridColumn": 1
+  },
+  {
+    "index": 2,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      45,
+      224,
+      296,
+      483
+    ],
+    "greenBBox": [
+      35,
+      224,
+      287,
+      512
+    ],
+    "brownWidth": 251,
+    "brownHeight": 259,
+    "greenWidth": 252,
+    "greenHeight": 288,
+    "greenScaleX": 0.996032,
+    "greenScaleY": 0.899306,
+    "brownCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        45,
+        224,
+        296,
+        483
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        35,
+        224,
+        287,
+        512
+      ]
+    },
+    "placement": {
+      "renderWidth": 636,
+      "renderHeight": 656,
+      "left": 42,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 280725,
+    "alphaIdentical": true,
+    "sourceGroup": 1,
+    "gridRow": 0,
+    "gridColumn": 2
+  },
+  {
+    "index": 3,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      59,
+      136,
+      342,
+      420
+    ],
+    "greenBBox": [
+      57,
+      98,
+      330,
+      378
+    ],
+    "brownWidth": 283,
+    "brownHeight": 284,
+    "greenWidth": 273,
+    "greenHeight": 280,
+    "greenScaleX": 1.03663,
+    "greenScaleY": 1.014286,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 588,
+          "ratioToMain": 0.01726,
+          "touchesCellEdge": true,
+          "bbox": [
+            197,
+            0,
+            237,
+            45
+          ]
+        }
+      ],
+      "bbox": [
+        59,
+        136,
+        342,
+        420
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 4,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 129,
+          "ratioToMain": 0.00394,
+          "touchesCellEdge": true,
+          "bbox": [
+            190,
+            0,
+            209,
+            9
+          ]
+        },
+        {
+          "area": 37,
+          "ratioToMain": 0.00113,
+          "touchesCellEdge": true,
+          "bbox": [
+            54,
+            506,
+            65,
+            512
+          ]
+        },
+        {
+          "area": 69,
+          "ratioToMain": 0.00211,
+          "touchesCellEdge": true,
+          "bbox": [
+            268,
+            506,
+            289,
+            512
+          ]
+        }
+      ],
+      "bbox": [
+        57,
+        98,
+        330,
+        378
+      ]
+    },
+    "placement": {
+      "renderWidth": 654,
+      "renderHeight": 656,
+      "left": 33,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 189971,
+    "alphaIdentical": true,
+    "sourceGroup": 1,
+    "gridRow": 1,
+    "gridColumn": 0
+  },
+  {
+    "index": 4,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      66,
+      135,
+      300,
+      423
+    ],
+    "greenBBox": [
+      63,
+      96,
+      288,
+      379
+    ],
+    "brownWidth": 234,
+    "brownHeight": 288,
+    "greenWidth": 225,
+    "greenHeight": 283,
+    "greenScaleX": 1.04,
+    "greenScaleY": 1.017668,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 436,
+          "ratioToMain": 0.01793,
+          "touchesCellEdge": true,
+          "bbox": [
+            184,
+            0,
+            201,
+            38
+          ]
+        }
+      ],
+      "bbox": [
+        66,
+        135,
+        300,
+        423
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 23,
+          "ratioToMain": 0.00099,
+          "touchesCellEdge": true,
+          "bbox": [
+            181,
+            0,
+            194,
+            3
+          ]
+        },
+        {
+          "area": 4166,
+          "ratioToMain": 0.1787,
+          "touchesCellEdge": true,
+          "bbox": [
+            90,
+            472,
+            257,
+            512
+          ]
+        }
+      ],
+      "bbox": [
+        63,
+        96,
+        288,
+        379
+      ]
+    },
+    "placement": {
+      "renderWidth": 533,
+      "renderHeight": 656,
+      "left": 93,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 133093,
+    "alphaIdentical": true,
+    "sourceGroup": 1,
+    "gridRow": 1,
+    "gridColumn": 1
+  },
+  {
+    "index": 5,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      46,
+      142,
+      300,
+      420
+    ],
+    "greenBBox": [
+      35,
+      104,
+      281,
+      376
+    ],
+    "brownWidth": 254,
+    "brownHeight": 278,
+    "greenWidth": 246,
+    "greenHeight": 272,
+    "greenScaleX": 1.03252,
+    "greenScaleY": 1.022059,
+    "brownCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 1928,
+          "ratioToMain": 0.04976,
+          "touchesCellEdge": true,
+          "bbox": [
+            81,
+            0,
+            166,
+            40
+          ]
+        },
+        {
+          "area": 247,
+          "ratioToMain": 0.00637,
+          "touchesCellEdge": true,
+          "bbox": [
+            282,
+            0,
+            306,
+            20
+          ]
+        }
+      ],
+      "bbox": [
+        46,
+        142,
+        300,
+        420
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 4,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 77,
+          "ratioToMain": 0.00207,
+          "touchesCellEdge": true,
+          "bbox": [
+            113,
+            0,
+            134,
+            6
+          ]
+        },
+        {
+          "area": 2380,
+          "ratioToMain": 0.064,
+          "touchesCellEdge": true,
+          "bbox": [
+            76,
+            471,
+            158,
+            512
+          ]
+        },
+        {
+          "area": 2847,
+          "ratioToMain": 0.07656,
+          "touchesCellEdge": true,
+          "bbox": [
+            158,
+            471,
+            252,
+            512
+          ]
+        }
+      ],
+      "bbox": [
+        35,
+        104,
+        281,
+        376
+      ]
+    },
+    "placement": {
+      "renderWidth": 599,
+      "renderHeight": 656,
+      "left": 60,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 224566,
+    "alphaIdentical": true,
+    "sourceGroup": 1,
+    "gridRow": 1,
+    "gridColumn": 2
+  },
+  {
+    "index": 6,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      55,
+      69,
+      338,
+      302
+    ],
+    "greenBBox": [
+      51,
+      0,
+      325,
+      226
+    ],
+    "brownWidth": 283,
+    "brownHeight": 233,
+    "greenWidth": 274,
+    "greenHeight": 226,
+    "greenScaleX": 1.032847,
+    "greenScaleY": 1.030973,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        55,
+        69,
+        338,
+        302
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        51,
+        0,
+        325,
+        226
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 573,
+      "left": 12,
+      "top": 95,
+      "baselineY": 668
+    },
+    "alphaPixels": 174187,
+    "alphaIdentical": true,
+    "sourceGroup": 1,
+    "gridRow": 2,
+    "gridColumn": 0
+  },
+  {
+    "index": 7,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      54,
+      33,
+      307,
+      318
+    ],
+    "greenBBox": [
+      51,
+      0,
+      294,
+      242
+    ],
+    "brownWidth": 253,
+    "brownHeight": 285,
+    "greenWidth": 243,
+    "greenHeight": 242,
+    "greenScaleX": 1.041152,
+    "greenScaleY": 1.177686,
+    "brownCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        54,
+        33,
+        307,
+        318
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        51,
+        0,
+        294,
+        242
+      ]
+    },
+    "placement": {
+      "renderWidth": 582,
+      "renderHeight": 656,
+      "left": 69,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 133772,
+    "alphaIdentical": true,
+    "sourceGroup": 1,
+    "gridRow": 2,
+    "gridColumn": 1
+  },
+  {
+    "index": 8,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      63,
+      31,
+      305,
+      318
+    ],
+    "greenBBox": [
+      49,
+      0,
+      289,
+      242
+    ],
+    "brownWidth": 242,
+    "brownHeight": 287,
+    "greenWidth": 240,
+    "greenHeight": 242,
+    "greenScaleX": 1.008333,
+    "greenScaleY": 1.18595,
+    "brownCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        63,
+        31,
+        305,
+        318
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        49,
+        0,
+        289,
+        242
+      ]
+    },
+    "placement": {
+      "renderWidth": 553,
+      "renderHeight": 656,
+      "left": 83,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 143047,
+    "alphaIdentical": true,
+    "sourceGroup": 1,
+    "gridRow": 2,
+    "gridColumn": 2
+  },
+  {
+    "index": 9,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      105,
+      132,
+      323,
+      362
+    ],
+    "greenBBox": [
+      101,
+      138,
+      311,
+      379
+    ],
+    "brownWidth": 218,
+    "brownHeight": 230,
+    "greenWidth": 210,
+    "greenHeight": 241,
+    "greenScaleX": 1.038095,
+    "greenScaleY": 0.954357,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        105,
+        132,
+        323,
+        362
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        101,
+        138,
+        311,
+        379
+      ]
+    },
+    "placement": {
+      "renderWidth": 622,
+      "renderHeight": 656,
+      "left": 49,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 187057,
+    "alphaIdentical": true,
+    "sourceGroup": 2,
+    "gridRow": 0,
+    "gridColumn": 0
+  },
+  {
+    "index": 10,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      70,
+      162,
+      281,
+      345
+    ],
+    "greenBBox": [
+      63,
+      171,
+      269,
+      362
+    ],
+    "brownWidth": 211,
+    "brownHeight": 183,
+    "greenWidth": 206,
+    "greenHeight": 191,
+    "greenScaleX": 1.024272,
+    "greenScaleY": 0.958115,
+    "brownCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        70,
+        162,
+        281,
+        345
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        63,
+        171,
+        269,
+        362
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 604,
+      "left": 12,
+      "top": 64,
+      "baselineY": 668
+    },
+    "alphaPixels": 146582,
+    "alphaIdentical": true,
+    "sourceGroup": 2,
+    "gridRow": 0,
+    "gridColumn": 1
+  },
+  {
+    "index": 11,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      29,
+      161,
+      263,
+      353
+    ],
+    "greenBBox": [
+      24,
+      166,
+      248,
+      369
+    ],
+    "brownWidth": 234,
+    "brownHeight": 192,
+    "greenWidth": 224,
+    "greenHeight": 203,
+    "greenScaleX": 1.044643,
+    "greenScaleY": 0.945813,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        29,
+        161,
+        263,
+        353
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        24,
+        166,
+        248,
+        369
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 571,
+      "left": 12,
+      "top": 97,
+      "baselineY": 668
+    },
+    "alphaPixels": 225122,
+    "alphaIdentical": true,
+    "sourceGroup": 2,
+    "gridRow": 0,
+    "gridColumn": 2
+  },
+  {
+    "index": 12,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      121,
+      85,
+      300,
+      304
+    ],
+    "greenBBox": [
+      111,
+      83,
+      284,
+      315
+    ],
+    "brownWidth": 179,
+    "brownHeight": 219,
+    "greenWidth": 173,
+    "greenHeight": 232,
+    "greenScaleX": 1.034682,
+    "greenScaleY": 0.943966,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 3,
+          "ratioToMain": 0.00013,
+          "touchesCellEdge": true,
+          "bbox": [
+            205,
+            0,
+            207,
+            2
+          ]
+        }
+      ],
+      "bbox": [
+        121,
+        85,
+        300,
+        304
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        111,
+        83,
+        284,
+        315
+      ]
+    },
+    "placement": {
+      "renderWidth": 536,
+      "renderHeight": 656,
+      "left": 92,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 213086,
+    "alphaIdentical": true,
+    "sourceGroup": 2,
+    "gridRow": 1,
+    "gridColumn": 0
+  },
+  {
+    "index": 13,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      66,
+      119,
+      297,
+      281
+    ],
+    "greenBBox": [
+      59,
+      119,
+      284,
+      293
+    ],
+    "brownWidth": 231,
+    "brownHeight": 162,
+    "greenWidth": 225,
+    "greenHeight": 174,
+    "greenScaleX": 1.026667,
+    "greenScaleY": 0.931034,
+    "brownCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 2,
+      "removedComponents": [
+        {
+          "area": 1,
+          "ratioToMain": 9e-05,
+          "touchesCellEdge": false,
+          "bbox": [
+            178,
+            264,
+            179,
+            265
+          ]
+        }
+      ],
+      "bbox": [
+        66,
+        119,
+        297,
+        281
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        59,
+        119,
+        284,
+        293
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 488,
+      "left": 12,
+      "top": 180,
+      "baselineY": 668
+    },
+    "alphaPixels": 210276,
+    "alphaIdentical": true,
+    "sourceGroup": 2,
+    "gridRow": 1,
+    "gridColumn": 1
+  },
+  {
+    "index": 14,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      54,
+      86,
+      257,
+      305
+    ],
+    "greenBBox": [
+      49,
+      85,
+      246,
+      315
+    ],
+    "brownWidth": 203,
+    "brownHeight": 219,
+    "greenWidth": 197,
+    "greenHeight": 230,
+    "greenScaleX": 1.030457,
+    "greenScaleY": 0.952174,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        54,
+        86,
+        257,
+        305
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        49,
+        85,
+        246,
+        315
+      ]
+    },
+    "placement": {
+      "renderWidth": 608,
+      "renderHeight": 656,
+      "left": 56,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 221530,
+    "alphaIdentical": true,
+    "sourceGroup": 2,
+    "gridRow": 1,
+    "gridColumn": 2
+  },
+  {
+    "index": 15,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      137,
+      23,
+      276,
+      249
+    ],
+    "greenBBox": [
+      128,
+      13,
+      264,
+      255
+    ],
+    "brownWidth": 139,
+    "brownHeight": 226,
+    "greenWidth": 136,
+    "greenHeight": 242,
+    "greenScaleX": 1.022059,
+    "greenScaleY": 0.933884,
+    "brownCleanup": {
+      "componentCount": 4,
+      "keptComponentCount": 2,
+      "removedComponents": [
+        {
+          "area": 2,
+          "ratioToMain": 0.00013,
+          "touchesCellEdge": false,
+          "bbox": [
+            199,
+            198,
+            201,
+            200
+          ]
+        },
+        {
+          "area": 1010,
+          "ratioToMain": 0.06674,
+          "touchesCellEdge": true,
+          "bbox": [
+            189,
+            321,
+            239,
+            362
+          ]
+        }
+      ],
+      "bbox": [
+        137,
+        23,
+        276,
+        249
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 1785,
+          "ratioToMain": 0.08854,
+          "touchesCellEdge": true,
+          "bbox": [
+            169,
+            329,
+            236,
+            384
+          ]
+        }
+      ],
+      "bbox": [
+        128,
+        13,
+        264,
+        255
+      ]
+    },
+    "placement": {
+      "renderWidth": 403,
+      "renderHeight": 656,
+      "left": 158,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 167425,
+    "alphaIdentical": true,
+    "sourceGroup": 2,
+    "gridRow": 2,
+    "gridColumn": 0
+  },
+  {
+    "index": 16,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      67,
+      27,
+      282,
+      249
+    ],
+    "greenBBox": [
+      60,
+      23,
+      267,
+      254
+    ],
+    "brownWidth": 215,
+    "brownHeight": 222,
+    "greenWidth": 207,
+    "greenHeight": 231,
+    "greenScaleX": 1.038647,
+    "greenScaleY": 0.961039,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        67,
+        27,
+        282,
+        249
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 2,
+      "removedComponents": [
+        {
+          "area": 85,
+          "ratioToMain": 0.00781,
+          "touchesCellEdge": true,
+          "bbox": [
+            62,
+            374,
+            77,
+            384
+          ]
+        }
+      ],
+      "bbox": [
+        60,
+        23,
+        267,
+        254
+      ]
+    },
+    "placement": {
+      "renderWidth": 635,
+      "renderHeight": 656,
+      "left": 42,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 125446,
+    "alphaIdentical": true,
+    "sourceGroup": 2,
+    "gridRow": 2,
+    "gridColumn": 1
+  },
+  {
+    "index": 17,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      47,
+      33,
+      265,
+      250
+    ],
+    "greenBBox": [
+      42,
+      27,
+      256,
+      254
+    ],
+    "brownWidth": 218,
+    "brownHeight": 217,
+    "greenWidth": 214,
+    "greenHeight": 227,
+    "greenScaleX": 1.018692,
+    "greenScaleY": 0.955947,
+    "brownCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 2,
+          "ratioToMain": 6e-05,
+          "touchesCellEdge": false,
+          "bbox": [
+            190,
+            72,
+            191,
+            74
+          ]
+        },
+        {
+          "area": 20,
+          "ratioToMain": 0.00057,
+          "touchesCellEdge": true,
+          "bbox": [
+            136,
+            357,
+            143,
+            362
+          ]
+        }
+      ],
+      "bbox": [
+        47,
+        33,
+        265,
+        250
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 294,
+          "ratioToMain": 0.00798,
+          "touchesCellEdge": true,
+          "bbox": [
+            117,
+            365,
+            146,
+            384
+          ]
+        }
+      ],
+      "bbox": [
+        42,
+        27,
+        256,
+        254
+      ]
+    },
+    "placement": {
+      "renderWidth": 659,
+      "renderHeight": 656,
+      "left": 30,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 333772,
+    "alphaIdentical": true,
+    "sourceGroup": 2,
+    "gridRow": 2,
+    "gridColumn": 2
+  },
+  {
+    "index": 18,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      113,
+      0,
+      297,
+      212
+    ],
+    "greenBBox": [
+      105,
+      0,
+      285,
+      213
+    ],
+    "brownWidth": 184,
+    "brownHeight": 212,
+    "greenWidth": 180,
+    "greenHeight": 213,
+    "greenScaleX": 1.022222,
+    "greenScaleY": 0.995305,
+    "brownCleanup": {
+      "componentCount": 4,
+      "keptComponentCount": 3,
+      "removedComponents": [
+        {
+          "area": 2,
+          "ratioToMain": 0.00019,
+          "touchesCellEdge": false,
+          "bbox": [
+            198,
+            202,
+            199,
+            204
+          ]
+        }
+      ],
+      "bbox": [
+        113,
+        0,
+        297,
+        212
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 3,
+      "removedComponents": [],
+      "bbox": [
+        105,
+        0,
+        285,
+        213
+      ]
+    },
+    "placement": {
+      "renderWidth": 569,
+      "renderHeight": 656,
+      "left": 75,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 246254,
+    "alphaIdentical": true,
+    "sourceGroup": 2,
+    "gridRow": 3,
+    "gridColumn": 0
+  },
+  {
+    "index": 19,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      66,
+      3,
+      297,
+      204
+    ],
+    "greenBBox": [
+      61,
+      0,
+      282,
+      205
+    ],
+    "brownWidth": 231,
+    "brownHeight": 201,
+    "greenWidth": 221,
+    "greenHeight": 205,
+    "greenScaleX": 1.045249,
+    "greenScaleY": 0.980488,
+    "brownCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 2,
+      "removedComponents": [
+        {
+          "area": 1,
+          "ratioToMain": 7e-05,
+          "touchesCellEdge": false,
+          "bbox": [
+            214,
+            105,
+            215,
+            106
+          ]
+        }
+      ],
+      "bbox": [
+        66,
+        3,
+        297,
+        204
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        61,
+        0,
+        282,
+        205
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 606,
+      "left": 12,
+      "top": 62,
+      "baselineY": 668
+    },
+    "alphaPixels": 205504,
+    "alphaIdentical": true,
+    "sourceGroup": 2,
+    "gridRow": 3,
+    "gridColumn": 1
+  },
+  {
+    "index": 20,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      7,
+      0,
+      274,
+      198
+    ],
+    "greenBBox": [
+      4,
+      0,
+      264,
+      198
+    ],
+    "brownWidth": 267,
+    "brownHeight": 198,
+    "greenWidth": 260,
+    "greenHeight": 198,
+    "greenScaleX": 1.026923,
+    "greenScaleY": 1.0,
+    "brownCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 3,
+      "removedComponents": [],
+      "bbox": [
+        7,
+        0,
+        274,
+        198
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 5,
+      "keptComponentCount": 3,
+      "removedComponents": [
+        {
+          "area": 2,
+          "ratioToMain": 0.00019,
+          "touchesCellEdge": false,
+          "bbox": [
+            134,
+            169,
+            136,
+            171
+          ]
+        },
+        {
+          "area": 2,
+          "ratioToMain": 0.00019,
+          "touchesCellEdge": false,
+          "bbox": [
+            132,
+            172,
+            134,
+            174
+          ]
+        }
+      ],
+      "bbox": [
+        4,
+        0,
+        264,
+        198
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 516,
+      "left": 12,
+      "top": 152,
+      "baselineY": 668
+    },
+    "alphaPixels": 182568,
+    "alphaIdentical": true,
+    "sourceGroup": 2,
+    "gridRow": 3,
+    "gridColumn": 2
+  },
+  {
+    "index": 21,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      84,
+      144,
+      331,
+      362
+    ],
+    "greenBBox": [
+      78,
+      152,
+      317,
+      382
+    ],
+    "brownWidth": 247,
+    "brownHeight": 218,
+    "greenWidth": 239,
+    "greenHeight": 230,
+    "greenScaleX": 1.033473,
+    "greenScaleY": 0.947826,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        84,
+        144,
+        331,
+        362
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        78,
+        152,
+        317,
+        382
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 614,
+      "left": 12,
+      "top": 54,
+      "baselineY": 668
+    },
+    "alphaPixels": 285950,
+    "alphaIdentical": true,
+    "sourceGroup": 3,
+    "gridRow": 0,
+    "gridColumn": 0
+  },
+  {
+    "index": 22,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      50,
+      158,
+      313,
+      346
+    ],
+    "greenBBox": [
+      41,
+      165,
+      296,
+      359
+    ],
+    "brownWidth": 263,
+    "brownHeight": 188,
+    "greenWidth": 255,
+    "greenHeight": 194,
+    "greenScaleX": 1.031373,
+    "greenScaleY": 0.969072,
+    "brownCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 3,
+      "removedComponents": [],
+      "bbox": [
+        50,
+        158,
+        313,
+        346
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 4,
+      "keptComponentCount": 3,
+      "removedComponents": [
+        {
+          "area": 12,
+          "ratioToMain": 0.00094,
+          "touchesCellEdge": false,
+          "bbox": [
+            167,
+            325,
+            168,
+            337
+          ]
+        }
+      ],
+      "bbox": [
+        41,
+        165,
+        296,
+        359
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 498,
+      "left": 12,
+      "top": 170,
+      "baselineY": 668
+    },
+    "alphaPixels": 206397,
+    "alphaIdentical": true,
+    "sourceGroup": 3,
+    "gridRow": 0,
+    "gridColumn": 1
+  },
+  {
+    "index": 23,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      29,
+      169,
+      281,
+      362
+    ],
+    "greenBBox": [
+      21,
+      177,
+      265,
+      380
+    ],
+    "brownWidth": 252,
+    "brownHeight": 193,
+    "greenWidth": 244,
+    "greenHeight": 203,
+    "greenScaleX": 1.032787,
+    "greenScaleY": 0.950739,
+    "brownCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 2,
+      "removedComponents": [
+        {
+          "area": 1,
+          "ratioToMain": 5e-05,
+          "touchesCellEdge": false,
+          "bbox": [
+            221,
+            189,
+            222,
+            190
+          ]
+        }
+      ],
+      "bbox": [
+        29,
+        169,
+        281,
+        362
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 2,
+      "removedComponents": [
+        {
+          "area": 1,
+          "ratioToMain": 5e-05,
+          "touchesCellEdge": false,
+          "bbox": [
+            201,
+            229,
+            202,
+            230
+          ]
+        }
+      ],
+      "bbox": [
+        21,
+        177,
+        265,
+        380
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 533,
+      "left": 12,
+      "top": 135,
+      "baselineY": 668
+    },
+    "alphaPixels": 277035,
+    "alphaIdentical": true,
+    "sourceGroup": 3,
+    "gridRow": 0,
+    "gridColumn": 2
+  },
+  {
+    "index": 24,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      89,
+      123,
+      341,
+      313
+    ],
+    "greenBBox": [
+      85,
+      120,
+      327,
+      317
+    ],
+    "brownWidth": 252,
+    "brownHeight": 190,
+    "greenWidth": 242,
+    "greenHeight": 197,
+    "greenScaleX": 1.041322,
+    "greenScaleY": 0.964467,
+    "brownCleanup": {
+      "componentCount": 5,
+      "keptComponentCount": 2,
+      "removedComponents": [
+        {
+          "area": 20,
+          "ratioToMain": 0.00105,
+          "touchesCellEdge": true,
+          "bbox": [
+            139,
+            0,
+            150,
+            7
+          ]
+        },
+        {
+          "area": 11,
+          "ratioToMain": 0.00058,
+          "touchesCellEdge": true,
+          "bbox": [
+            175,
+            0,
+            181,
+            4
+          ]
+        },
+        {
+          "area": 248,
+          "ratioToMain": 0.01303,
+          "touchesCellEdge": true,
+          "bbox": [
+            198,
+            0,
+            256,
+            6
+          ]
+        }
+      ],
+      "bbox": [
+        89,
+        123,
+        341,
+        313
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        85,
+        120,
+        327,
+        317
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 525,
+      "left": 12,
+      "top": 143,
+      "baselineY": 668
+    },
+    "alphaPixels": 249101,
+    "alphaIdentical": true,
+    "sourceGroup": 3,
+    "gridRow": 1,
+    "gridColumn": 0
+  },
+  {
+    "index": 25,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      69,
+      102,
+      311,
+      328
+    ],
+    "greenBBox": [
+      63,
+      101,
+      298,
+      333
+    ],
+    "brownWidth": 242,
+    "brownHeight": 226,
+    "greenWidth": 235,
+    "greenHeight": 232,
+    "greenScaleX": 1.029787,
+    "greenScaleY": 0.974138,
+    "brownCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        69,
+        102,
+        311,
+        328
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 2,
+          "ratioToMain": 6e-05,
+          "touchesCellEdge": false,
+          "bbox": [
+            155,
+            117,
+            157,
+            119
+          ]
+        }
+      ],
+      "bbox": [
+        63,
+        101,
+        298,
+        333
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 650,
+      "left": 12,
+      "top": 18,
+      "baselineY": 668
+    },
+    "alphaPixels": 280395,
+    "alphaIdentical": true,
+    "sourceGroup": 3,
+    "gridRow": 1,
+    "gridColumn": 1
+  },
+  {
+    "index": 26,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      44,
+      89,
+      281,
+      343
+    ],
+    "greenBBox": [
+      35,
+      87,
+      268,
+      346
+    ],
+    "brownWidth": 237,
+    "brownHeight": 254,
+    "greenWidth": 233,
+    "greenHeight": 259,
+    "greenScaleX": 1.017167,
+    "greenScaleY": 0.980695,
+    "brownCleanup": {
+      "componentCount": 4,
+      "keptComponentCount": 2,
+      "removedComponents": [
+        {
+          "area": 9,
+          "ratioToMain": 0.00071,
+          "touchesCellEdge": true,
+          "bbox": [
+            146,
+            0,
+            152,
+            2
+          ]
+        },
+        {
+          "area": 6,
+          "ratioToMain": 0.00047,
+          "touchesCellEdge": true,
+          "bbox": [
+            160,
+            0,
+            164,
+            2
+          ]
+        }
+      ],
+      "bbox": [
+        44,
+        89,
+        281,
+        343
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        35,
+        87,
+        268,
+        346
+      ]
+    },
+    "placement": {
+      "renderWidth": 612,
+      "renderHeight": 656,
+      "left": 54,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 140921,
+    "alphaIdentical": true,
+    "sourceGroup": 3,
+    "gridRow": 1,
+    "gridColumn": 2
+  },
+  {
+    "index": 27,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      84,
+      38,
+      331,
+      283
+    ],
+    "greenBBox": [
+      77,
+      22,
+      318,
+      276
+    ],
+    "brownWidth": 247,
+    "brownHeight": 245,
+    "greenWidth": 241,
+    "greenHeight": 254,
+    "greenScaleX": 1.024896,
+    "greenScaleY": 0.964567,
+    "brownCleanup": {
+      "componentCount": 4,
+      "keptComponentCount": 4,
+      "removedComponents": [],
+      "bbox": [
+        84,
+        38,
+        331,
+        283
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 6,
+      "keptComponentCount": 4,
+      "removedComponents": [
+        {
+          "area": 109,
+          "ratioToMain": 0.01781,
+          "touchesCellEdge": true,
+          "bbox": [
+            287,
+            374,
+            308,
+            384
+          ]
+        },
+        {
+          "area": 6,
+          "ratioToMain": 0.00098,
+          "touchesCellEdge": true,
+          "bbox": [
+            85,
+            382,
+            90,
+            384
+          ]
+        }
+      ],
+      "bbox": [
+        77,
+        22,
+        318,
+        276
+      ]
+    },
+    "placement": {
+      "renderWidth": 661,
+      "renderHeight": 656,
+      "left": 29,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 172137,
+    "alphaIdentical": true,
+    "sourceGroup": 3,
+    "gridRow": 2,
+    "gridColumn": 0
+  },
+  {
+    "index": 28,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      75,
+      38,
+      289,
+      269
+    ],
+    "greenBBox": [
+      67,
+      22,
+      277,
+      262
+    ],
+    "brownWidth": 214,
+    "brownHeight": 231,
+    "greenWidth": 210,
+    "greenHeight": 240,
+    "greenScaleX": 1.019048,
+    "greenScaleY": 0.9625,
+    "brownCleanup": {
+      "componentCount": 4,
+      "keptComponentCount": 2,
+      "removedComponents": [
+        {
+          "area": 1,
+          "ratioToMain": 5e-05,
+          "touchesCellEdge": false,
+          "bbox": [
+            149,
+            161,
+            150,
+            162
+          ]
+        },
+        {
+          "area": 12,
+          "ratioToMain": 0.00064,
+          "touchesCellEdge": false,
+          "bbox": [
+            142,
+            184,
+            146,
+            195
+          ]
+        }
+      ],
+      "bbox": [
+        75,
+        38,
+        289,
+        269
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 1,
+          "ratioToMain": 3e-05,
+          "touchesCellEdge": false,
+          "bbox": [
+            124,
+            189,
+            125,
+            190
+          ]
+        }
+      ],
+      "bbox": [
+        67,
+        22,
+        277,
+        262
+      ]
+    },
+    "placement": {
+      "renderWidth": 608,
+      "renderHeight": 656,
+      "left": 56,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 264200,
+    "alphaIdentical": true,
+    "sourceGroup": 3,
+    "gridRow": 2,
+    "gridColumn": 1
+  },
+  {
+    "index": 29,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      30,
+      38,
+      282,
+      270
+    ],
+    "greenBBox": [
+      22,
+      22,
+      269,
+      264
+    ],
+    "brownWidth": 252,
+    "brownHeight": 232,
+    "greenWidth": 247,
+    "greenHeight": 242,
+    "greenScaleX": 1.020243,
+    "greenScaleY": 0.958678,
+    "brownCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        30,
+        38,
+        282,
+        270
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 19,
+          "ratioToMain": 0.00059,
+          "touchesCellEdge": true,
+          "bbox": [
+            202,
+            380,
+            210,
+            384
+          ]
+        },
+        {
+          "area": 17,
+          "ratioToMain": 0.00053,
+          "touchesCellEdge": true,
+          "bbox": [
+            222,
+            383,
+            239,
+            384
+          ]
+        }
+      ],
+      "bbox": [
+        22,
+        22,
+        269,
+        264
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 641,
+      "left": 12,
+      "top": 27,
+      "baselineY": 668
+    },
+    "alphaPixels": 253698,
+    "alphaIdentical": true,
+    "sourceGroup": 3,
+    "gridRow": 2,
+    "gridColumn": 2
+  },
+  {
+    "index": 30,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      84,
+      18,
+      329,
+      210
+    ],
+    "greenBBox": [
+      78,
+      0,
+      316,
+      190
+    ],
+    "brownWidth": 245,
+    "brownHeight": 192,
+    "greenWidth": 238,
+    "greenHeight": 190,
+    "greenScaleX": 1.029412,
+    "greenScaleY": 1.010526,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        84,
+        18,
+        329,
+        210
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        78,
+        0,
+        316,
+        190
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 545,
+      "left": 12,
+      "top": 123,
+      "baselineY": 668
+    },
+    "alphaPixels": 260553,
+    "alphaIdentical": true,
+    "sourceGroup": 3,
+    "gridRow": 3,
+    "gridColumn": 0
+  },
+  {
+    "index": 31,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      61,
+      39,
+      312,
+      193
+    ],
+    "greenBBox": [
+      51,
+      13,
+      299,
+      173
+    ],
+    "brownWidth": 251,
+    "brownHeight": 154,
+    "greenWidth": 248,
+    "greenHeight": 160,
+    "greenScaleX": 1.012097,
+    "greenScaleY": 0.9625,
+    "brownCleanup": {
+      "componentCount": 4,
+      "keptComponentCount": 2,
+      "removedComponents": [
+        {
+          "area": 1,
+          "ratioToMain": 7e-05,
+          "touchesCellEdge": false,
+          "bbox": [
+            246,
+            125,
+            247,
+            126
+          ]
+        },
+        {
+          "area": 2,
+          "ratioToMain": 0.00015,
+          "touchesCellEdge": false,
+          "bbox": [
+            216,
+            146,
+            218,
+            148
+          ]
+        }
+      ],
+      "bbox": [
+        61,
+        39,
+        312,
+        193
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        51,
+        13,
+        299,
+        173
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 427,
+      "left": 12,
+      "top": 241,
+      "baselineY": 668
+    },
+    "alphaPixels": 173037,
+    "alphaIdentical": true,
+    "sourceGroup": 3,
+    "gridRow": 3,
+    "gridColumn": 1
+  },
+  {
+    "index": 32,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      28,
+      22,
+      282,
+      196
+    ],
+    "greenBBox": [
+      20,
+      0,
+      270,
+      176
+    ],
+    "brownWidth": 254,
+    "brownHeight": 174,
+    "greenWidth": 250,
+    "greenHeight": 176,
+    "greenScaleX": 1.016,
+    "greenScaleY": 0.988636,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        28,
+        22,
+        282,
+        196
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 2,
+      "removedComponents": [],
+      "bbox": [
+        20,
+        0,
+        270,
+        176
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 477,
+      "left": 12,
+      "top": 191,
+      "baselineY": 668
+    },
+    "alphaPixels": 183528,
+    "alphaIdentical": true,
+    "sourceGroup": 3,
+    "gridRow": 3,
+    "gridColumn": 2
+  },
+  {
+    "index": 33,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      67,
+      137,
+      361,
+      346
+    ],
+    "greenBBox": [
+      56,
+      142,
+      336,
+      366
+    ],
+    "brownWidth": 294,
+    "brownHeight": 209,
+    "greenWidth": 280,
+    "greenHeight": 224,
+    "greenScaleX": 1.05,
+    "greenScaleY": 0.933036,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 645,
+          "ratioToMain": 0.03767,
+          "touchesCellEdge": true,
+          "bbox": [
+            198,
+            452,
+            238,
+            483
+          ]
+        }
+      ],
+      "bbox": [
+        67,
+        137,
+        361,
+        346
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 818,
+          "ratioToMain": 0.04628,
+          "touchesCellEdge": true,
+          "bbox": [
+            181,
+            476,
+            224,
+            512
+          ]
+        }
+      ],
+      "bbox": [
+        56,
+        142,
+        336,
+        366
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 495,
+      "left": 12,
+      "top": 173,
+      "baselineY": 668
+    },
+    "alphaPixels": 105285,
+    "alphaIdentical": true,
+    "sourceGroup": 4,
+    "gridRow": 0,
+    "gridColumn": 0
+  },
+  {
+    "index": 34,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      59,
+      118,
+      302,
+      360
+    ],
+    "greenBBox": [
+      49,
+      123,
+      282,
+      380
+    ],
+    "brownWidth": 243,
+    "brownHeight": 242,
+    "greenWidth": 233,
+    "greenHeight": 257,
+    "greenScaleX": 1.042918,
+    "greenScaleY": 0.941634,
+    "brownCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        59,
+        118,
+        302,
+        360
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 1,
+      "keptComponentCount": 1,
+      "removedComponents": [],
+      "bbox": [
+        49,
+        123,
+        282,
+        380
+      ]
+    },
+    "placement": {
+      "renderWidth": 659,
+      "renderHeight": 656,
+      "left": 30,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 344196,
+    "alphaIdentical": true,
+    "sourceGroup": 4,
+    "gridRow": 0,
+    "gridColumn": 1
+  },
+  {
+    "index": 35,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      39,
+      122,
+      295,
+      351
+    ],
+    "greenBBox": [
+      31,
+      128,
+      277,
+      370
+    ],
+    "brownWidth": 256,
+    "brownHeight": 229,
+    "greenWidth": 246,
+    "greenHeight": 242,
+    "greenScaleX": 1.04065,
+    "greenScaleY": 0.946281,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 2552,
+          "ratioToMain": 0.11129,
+          "touchesCellEdge": true,
+          "bbox": [
+            47,
+            437,
+            138,
+            483
+          ]
+        }
+      ],
+      "bbox": [
+        39,
+        122,
+        295,
+        351
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 2910,
+          "ratioToMain": 0.12399,
+          "touchesCellEdge": true,
+          "bbox": [
+            38,
+            460,
+            130,
+            512
+          ]
+        }
+      ],
+      "bbox": [
+        31,
+        128,
+        277,
+        370
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 623,
+      "left": 12,
+      "top": 45,
+      "baselineY": 668
+    },
+    "alphaPixels": 179829,
+    "alphaIdentical": true,
+    "sourceGroup": 4,
+    "gridRow": 0,
+    "gridColumn": 2
+  },
+  {
+    "index": 36,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      84,
+      0,
+      338,
+      482
+    ],
+    "greenBBox": [
+      71,
+      0,
+      316,
+      512
+    ],
+    "brownWidth": 254,
+    "brownHeight": 482,
+    "greenWidth": 245,
+    "greenHeight": 512,
+    "greenScaleX": 1.036735,
+    "greenScaleY": 0.941406,
+    "brownCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 3,
+      "removedComponents": [],
+      "bbox": [
+        84,
+        0,
+        338,
+        482
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 3,
+      "removedComponents": [],
+      "bbox": [
+        71,
+        0,
+        316,
+        512
+      ]
+    },
+    "placement": {
+      "renderWidth": 346,
+      "renderHeight": 656,
+      "left": 187,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 85456,
+    "alphaIdentical": true,
+    "sourceGroup": 4,
+    "gridRow": 1,
+    "gridColumn": 0
+  },
+  {
+    "index": 37,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      61,
+      19,
+      305,
+      482
+    ],
+    "greenBBox": [
+      50,
+      16,
+      285,
+      512
+    ],
+    "brownWidth": 244,
+    "brownHeight": 463,
+    "greenWidth": 235,
+    "greenHeight": 496,
+    "greenScaleX": 1.038298,
+    "greenScaleY": 0.933468,
+    "brownCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 3,
+      "removedComponents": [],
+      "bbox": [
+        61,
+        19,
+        305,
+        482
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 3,
+      "keptComponentCount": 3,
+      "removedComponents": [],
+      "bbox": [
+        50,
+        16,
+        285,
+        512
+      ]
+    },
+    "placement": {
+      "renderWidth": 346,
+      "renderHeight": 656,
+      "left": 187,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 74662,
+    "alphaIdentical": true,
+    "sourceGroup": 4,
+    "gridRow": 1,
+    "gridColumn": 1
+  },
+  {
+    "index": 38,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      47,
+      0,
+      281,
+      482
+    ],
+    "greenBBox": [
+      39,
+      0,
+      267,
+      512
+    ],
+    "brownWidth": 234,
+    "brownHeight": 482,
+    "greenWidth": 228,
+    "greenHeight": 512,
+    "greenScaleX": 1.026316,
+    "greenScaleY": 0.941406,
+    "brownCleanup": {
+      "componentCount": 4,
+      "keptComponentCount": 3,
+      "removedComponents": [
+        {
+          "area": 58,
+          "ratioToMain": 0.00287,
+          "touchesCellEdge": true,
+          "bbox": [
+            235,
+            472,
+            251,
+            482
+          ]
+        }
+      ],
+      "bbox": [
+        47,
+        0,
+        281,
+        482
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 4,
+      "keptComponentCount": 3,
+      "removedComponents": [
+        {
+          "area": 117,
+          "ratioToMain": 0.00562,
+          "touchesCellEdge": true,
+          "bbox": [
+            215,
+            496,
+            239,
+            512
+          ]
+        }
+      ],
+      "bbox": [
+        39,
+        0,
+        267,
+        512
+      ]
+    },
+    "placement": {
+      "renderWidth": 318,
+      "renderHeight": 656,
+      "left": 201,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 80131,
+    "alphaIdentical": true,
+    "sourceGroup": 4,
+    "gridRow": 1,
+    "gridColumn": 2
+  },
+  {
+    "index": 39,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      94,
+      121,
+      311,
+      385
+    ],
+    "greenBBox": [
+      80,
+      125,
+      291,
+      406
+    ],
+    "brownWidth": 217,
+    "brownHeight": 264,
+    "greenWidth": 211,
+    "greenHeight": 281,
+    "greenScaleX": 1.028436,
+    "greenScaleY": 0.939502,
+    "brownCleanup": {
+      "componentCount": 5,
+      "keptComponentCount": 4,
+      "removedComponents": [
+        {
+          "area": 968,
+          "ratioToMain": 0.0685,
+          "touchesCellEdge": true,
+          "bbox": [
+            178,
+            0,
+            243,
+            29
+          ]
+        }
+      ],
+      "bbox": [
+        94,
+        121,
+        311,
+        385
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 5,
+      "keptComponentCount": 4,
+      "removedComponents": [
+        {
+          "area": 840,
+          "ratioToMain": 0.05777,
+          "touchesCellEdge": true,
+          "bbox": [
+            163,
+            0,
+            222,
+            28
+          ]
+        }
+      ],
+      "bbox": [
+        80,
+        125,
+        291,
+        406
+      ]
+    },
+    "placement": {
+      "renderWidth": 539,
+      "renderHeight": 656,
+      "left": 90,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 161311,
+    "alphaIdentical": true,
+    "sourceGroup": 4,
+    "gridRow": 2,
+    "gridColumn": 0
+  },
+  {
+    "index": 40,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      34,
+      137,
+      327,
+      367
+    ],
+    "greenBBox": [
+      23,
+      143,
+      307,
+      387
+    ],
+    "brownWidth": 293,
+    "brownHeight": 230,
+    "greenWidth": 284,
+    "greenHeight": 244,
+    "greenScaleX": 1.03169,
+    "greenScaleY": 0.942623,
+    "brownCleanup": {
+      "componentCount": 5,
+      "keptComponentCount": 3,
+      "removedComponents": [
+        {
+          "area": 326,
+          "ratioToMain": 0.02156,
+          "touchesCellEdge": true,
+          "bbox": [
+            125,
+            0,
+            176,
+            8
+          ]
+        },
+        {
+          "area": 1045,
+          "ratioToMain": 0.0691,
+          "touchesCellEdge": true,
+          "bbox": [
+            196,
+            0,
+            250,
+            41
+          ]
+        }
+      ],
+      "bbox": [
+        34,
+        137,
+        327,
+        367
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 5,
+      "keptComponentCount": 3,
+      "removedComponents": [
+        {
+          "area": 262,
+          "ratioToMain": 0.01685,
+          "touchesCellEdge": true,
+          "bbox": [
+            114,
+            0,
+            159,
+            8
+          ]
+        },
+        {
+          "area": 945,
+          "ratioToMain": 0.06076,
+          "touchesCellEdge": true,
+          "bbox": [
+            180,
+            0,
+            229,
+            41
+          ]
+        }
+      ],
+      "bbox": [
+        23,
+        143,
+        307,
+        387
+      ]
+    },
+    "placement": {
+      "renderWidth": 696,
+      "renderHeight": 546,
+      "left": 12,
+      "top": 122,
+      "baselineY": 668
+    },
+    "alphaPixels": 126462,
+    "alphaIdentical": true,
+    "sourceGroup": 4,
+    "gridRow": 2,
+    "gridColumn": 1
+  },
+  {
+    "index": 41,
+    "canvasWidth": 720,
+    "canvasHeight": 680,
+    "anchorX": 0.5,
+    "anchorY": 1.0,
+    "brownBBox": [
+      40,
+      138,
+      285,
+      389
+    ],
+    "greenBBox": [
+      33,
+      144,
+      269,
+      410
+    ],
+    "brownWidth": 245,
+    "brownHeight": 251,
+    "greenWidth": 236,
+    "greenHeight": 266,
+    "greenScaleX": 1.038136,
+    "greenScaleY": 0.943609,
+    "brownCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 2747,
+          "ratioToMain": 0.08921,
+          "touchesCellEdge": true,
+          "bbox": [
+            91,
+            0,
+            244,
+            37
+          ]
+        }
+      ],
+      "bbox": [
+        40,
+        138,
+        285,
+        389
+      ]
+    },
+    "greenCleanup": {
+      "componentCount": 2,
+      "keptComponentCount": 1,
+      "removedComponents": [
+        {
+          "area": 2692,
+          "ratioToMain": 0.08528,
+          "touchesCellEdge": true,
+          "bbox": [
+            84,
+            0,
+            228,
+            37
+          ]
+        }
+      ],
+      "bbox": [
+        33,
+        144,
+        269,
+        410
+      ]
+    },
+    "placement": {
+      "renderWidth": 640,
+      "renderHeight": 656,
+      "left": 40,
+      "top": 12,
+      "baselineY": 668
+    },
+    "alphaPixels": 224349,
+    "alphaIdentical": true,
+    "sourceGroup": 4,
+    "gridRow": 2,
+    "gridColumn": 2
+  }
+]

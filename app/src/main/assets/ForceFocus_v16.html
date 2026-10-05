@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <title>ForceFocus v16 · 常规模式首页</title>
+    <link rel="stylesheet" href="ui/octagon.css">
+    <link rel="stylesheet" href="ui/home.css">
+    <link rel="stylesheet" href="ui/focus.css">
+    <link rel="stylesheet" href="calendar/calendar.css">
+    <link rel="stylesheet" href="sidebar/sidebar.css">
+    <link rel="stylesheet" href="guidebook/guidebook.css">
+    <link rel="preload" as="image" href="ui/橄榄绿低多边形圆形徽章.png">
+    <link rel="preload" as="image" href="ui/timeline_leaf.png">
+    <link rel="preload" as="image" href="ui/低多边形绿色汉堡菜单图标.png">
+</head>
+<body>
+    <!-- This page is the stage-one, home-only continuation of ForceFocus_v16.html. -->
+    <main id="home" class="home" aria-label="ForceFocus 常规模式首页">
+        <div id="homeVisualLayer" class="home-visual-layer">
+        <button id="sidebarButton" class="asset-button top-button" type="button" aria-label="打开侧边栏">
+            <img src="ui/低多边形绿色汉堡菜单图标.png" alt="" draggable="false">
+        </button>
+
+        <button id="modeButton" class="asset-button top-button" type="button" aria-label="常规模式；切换模式">
+            <img src="ui/regular_mode_forest.png" alt="" draggable="false">
+        </button>
+
+        <div id="taskLeaves" aria-label="工作内容选择"></div>
+
+        <button id="focusCircle" class="focus-circle" type="button" aria-label="进入专注">
+            <img src="ui/橄榄绿低多边形圆形徽章.png" alt="" draggable="false" fetchpriority="high" decoding="async">
+            <canvas id="circleText" aria-hidden="true"></canvas>
+        </button>
+
+        <section id="timeBox" class="time-box ff-octagon-host" aria-label="专注时长选择">
+            <div class="time-box-shadow" aria-hidden="true">
+                <div class="time-box-border">
+                    <div class="time-box-fill"></div>
+                </div>
+            </div>
+
+            <div id="timelineViewport" class="timeline-viewport" role="slider" aria-valuemin="5" aria-valuemax="240" aria-valuenow="120" aria-valuetext="120 分钟" tabindex="0">
+                <div id="timelineNodes" class="timeline-nodes"></div>
+                <canvas id="timelineLabels" class="timeline-labels" aria-hidden="true"></canvas>
+            </div>
+
+            <button id="memoryButton" class="asset-button time-icon" type="button" aria-label="最近使用的专注时间" aria-expanded="false" aria-controls="memoryDropdown">
+                <img src="ui/低多边形橄榄绿书签徽章.png" alt="" draggable="false">
+            </button>
+
+            <div id="memoryDropdown" class="memory-dropdown ff-octagon-host" role="menu" aria-label="最近使用的专注时间" aria-hidden="true">
+                <div id="memoryDropdownList" class="memory-dropdown-list"></div>
+            </div>
+
+            <button id="lockButton" class="asset-button time-icon" type="button" aria-label="时长锁接口">
+                <img src="ui/低多边形绿色叶形锁图标.png" alt="" draggable="false">
+            </button>
+        </section>
+
+        </div>
+
+        <div id="focusClockLayer" class="focus-clock-layer" aria-label="专注倒计时时钟" aria-hidden="true">
+            <svg id="focusSilkSvg" class="focus-silk" viewBox="0 0 691 1536" preserveAspectRatio="none" aria-hidden="true">
+                <line id="focusSilkLine" x1="346" y1="725" x2="346" y2="1190"></line>
+            </svg>
+
+            <img id="focusWhitelistLeft" class="focus-whitelist-leaf focus-whitelist-trace focus-whitelist-left"
+                 src="focus_clock/focus_whitelist_leaf_left_olive_trace.png" alt="" draggable="false">
+            <img id="focusWhitelistRight" class="focus-whitelist-leaf focus-whitelist-trace focus-whitelist-right"
+                 src="focus_clock/focus_whitelist_leaf_right_olive_trace.png" alt="" draggable="false">
+
+            <div id="focusTickRing" class="focus-tick-ring" aria-hidden="true">
+                <span id="focusZeroSeed" class="focus-zero-seed"><span></span></span>
+            </div>
+
+            <svg id="focusCountdownBranch" class="focus-countdown-branch" viewBox="0 0 691 1536" preserveAspectRatio="none" aria-label="长按并逆时针旋转结束专注">
+                <g id="focusBranchGeometry">
+                    <polygon class="focus-branch-shape" points="349.5,725 350.4,696.74 351.85,659.06 349.1,619.81 345.4,589.98 345.4,568 344.6,568 342.6,589.98 344.9,619.81 346.55,659.06 344,696.74 342.5,725"></polygon>
+                    <polygon class="focus-branch-knot" points="345.3,720.4 350.3,723.5 349.2,728.5 345.5,729.4 341.8,726.1 342.8,721.6"></polygon>
+                    <polyline id="focusBranchHitArea" class="focus-branch-hit-path"
+                              points="348.48,672.67 349.2,659.06 347,619.81 344,589.98 345,568"
+                              aria-label="长按并逆时针旋转枝针结束专注"></polyline>
+                </g>
+            </svg>
+
+            <img id="focusSpider" class="focus-spider" src="focus_clock/focus_spider.png" alt="" draggable="false">
+            <button id="focusSpiderHitArea" class="focus-spider-hit" type="button" aria-label="长按并拖动蜘蛛打开白名单应用"></button>
+
+            <div id="focusLabelLeft" class="focus-app-label focus-app-label-left" aria-hidden="true"></div>
+            <div id="focusLabelRight" class="focus-app-label focus-app-label-right" aria-hidden="true"></div>
+            <canvas id="focusTaskTitle" class="focus-task-title" aria-label="当前专注任务"></canvas>
+        </div>
+
+        <section id="calendarLayer" class="calendar-layer" aria-label="专注日历" aria-hidden="true">
+            <img id="calendarBackground" class="calendar-background"
+                 src="calendar/calendar-background.png" alt="" draggable="false" loading="lazy" decoding="async">
+
+            <header class="calendar-month-header">
+                <button id="calendarPreviousMonth" class="calendar-month-arrow" type="button" aria-label="上个月">‹</button>
+                <h1 id="calendarMonthTitle" class="calendar-month-title"></h1>
+                <button id="calendarNextMonth" class="calendar-month-arrow" type="button" aria-label="下个月">›</button>
+            </header>
+
+            <div id="calendarWeekdays" class="calendar-weekdays" aria-hidden="true"></div>
+            <div id="calendarDates" class="calendar-dates" role="grid" aria-label="月份日期"></div>
+
+            <img id="calendarDecorSpider" class="calendar-decor-spider"
+                 src="focus_clock/focus_spider.png" alt="" draggable="false" loading="lazy" decoding="async">
+
+            <div id="calendarPullSpider" class="calendar-pull-spider" aria-hidden="true">
+                <img src="focus_clock/focus_spider.png" alt="" draggable="false">
+            </div>
+            <button id="calendarPullSpiderHit" class="calendar-pull-spider-hit" type="button"
+                    aria-label="向下拉动查看专注人格"></button>
+
+            <article id="calendarTicket" class="calendar-ticket ff-octagon-host" aria-hidden="true">
+                <div id="calendarTicketTrack" class="calendar-ticket-track"></div>
+                <div id="calendarTicketDots" class="calendar-ticket-dots" aria-label="人格分页"></div>
+            </article>
+        </section>
+
+        <div id="sidebarScrim" class="sidebar-scrim" aria-hidden="true"></div>
+        <aside id="sidebarDrawer" class="sidebar-drawer" aria-label="Force Focus 侧边栏" aria-hidden="true">
+            <div id="sidebarPrimary" class="sidebar-primary">
+                <h2 class="sidebar-title">Force Focus</h2>
+                <section class="sidebar-section" data-section="permissions">
+                    <button class="sidebar-entry" data-panel="permissions" type="button" aria-expanded="false"><img src="ui/timeline_leaf.png" alt="" draggable="false"><span>权限设置</span></button>
+                    <div id="sidebarPermissions" class="sidebar-inline-panel" aria-hidden="true"></div>
+                </section>
+                <section class="sidebar-section" data-section="work">
+                    <button class="sidebar-entry" data-panel="work" type="button" aria-expanded="false"><img src="ui/timeline_leaf.png" alt="" draggable="false"><span>工作内容</span></button>
+                    <div id="sidebarWorkItems" class="sidebar-inline-panel" aria-hidden="true"></div>
+                </section>
+                <section class="sidebar-section" data-section="whitelist">
+                    <button class="sidebar-entry" data-panel="whitelist" type="button"><img src="ui/timeline_leaf.png" alt="" draggable="false"><span>白名单匹配</span></button>
+                </section>
+            </div>
+            <button id="sidebarForestGuide" class="sidebar-forest-guide" type="button" aria-label="打开人格图鉴">
+                <img src="sidebar/sidebar_forest_guide_transparent.png" alt="" draggable="false" loading="lazy" decoding="async">
+            </button>
+        </aside>
+
+        <section id="whitelistPage" class="whitelist-page" aria-label="白名单匹配" aria-hidden="true">
+            <div class="whitelist-page-frame ff-octagon">
+                <button id="whitelistPageBack" class="whitelist-page-back" type="button" aria-label="返回侧边栏">‹</button>
+                <h2>白名单匹配</h2><div id="whitelistPageList" class="whitelist-page-list"></div>
+            </div>
+            <section id="installedAppPicker" class="installed-app-picker ff-octagon" aria-hidden="true">
+                <button id="installedAppPickerBack" class="installed-app-picker-back" type="button" aria-label="返回白名单匹配">‹</button>
+                <div id="installedAppPickerList" class="installed-app-picker-list"></div>
+            </section>
+        </section>
+
+        <section id="guidebookPage" class="guidebook-page" aria-label="人格图鉴" aria-hidden="true">
+            <header class="guidebook-header">
+                <button id="guidebookBack" class="guidebook-back" type="button" aria-label="返回侧边栏">‹</button>
+                <h2>人格图鉴</h2>
+            </header>
+            <div id="guidebookGrid" class="guidebook-grid" role="list" aria-label="人格、名称与点亮条件"></div>
+        </section>
+    </main>
+
+    <script src="ffti/ffti-rules.js"></script>
+    <script src="ui/data.js"></script>
+    <script src="ui/home.js"></script>
+    <script src="ui/focus.js"></script>
+    <script src="calendar/calendar.js"></script>
+    <script src="sidebar/sidebar.js"></script>
+    <script src="guidebook/guidebook.js"></script>
+</body>
+</html>

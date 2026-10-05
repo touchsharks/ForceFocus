@@ -1,0 +1,243 @@
+:root {
+    color-scheme: light;
+    --background: #FFFDE4;
+    --panel: #FAF8EC;
+    --panel-line: #B5B591;
+    --tick: #6C7757;
+    --selected-tick: #66764E;
+    --circle-text: #F7F3E8;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: transparent;
+}
+
+body {
+    position: relative;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: inherit;
+    font: inherit;
+}
+
+.home {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    background: transparent;
+    touch-action: pan-y;
+}
+
+.asset-button,
+.focus-circle,
+.task-leaf {
+    position: absolute;
+    display: block;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.asset-button img,
+.task-leaf img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    pointer-events: none;
+}
+
+.top-button {
+    z-index: 5;
+    transform: translate(-50%, -50%);
+}
+
+#sidebarButton.play-sidebar-feedback {
+    animation: sidebarButtonPress 150ms cubic-bezier(.22, 1, .36, 1);
+}
+
+@keyframes sidebarButtonPress {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    45% { transform: translate(-50%, -50%) scale(.92); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.task-leaf {
+    z-index: 3;
+    transform-origin: center;
+    overflow: visible;
+    filter:
+        drop-shadow(0.22vw 0.32vw 0.43vw rgba(74, 80, 51, 0.20))
+        drop-shadow(0.65vw 1.08vw 1.23vw rgba(55, 61, 34, 0.32));
+}
+
+.task-leaf img {
+    transform-origin: center;
+}
+
+.focus-circle {
+    z-index: 2;
+    overflow: hidden;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.focus-circle > img,
+.focus-circle > canvas {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.focus-circle > img {
+    object-fit: contain;
+}
+
+.time-box {
+    position: absolute;
+    z-index: 4;
+    overflow: visible;
+}
+
+.time-box-shadow,
+.time-box-border,
+.time-box-fill {
+    position: absolute;
+    inset: 0;
+}
+
+.time-box-shadow {
+    filter: drop-shadow(0 3px 8px rgba(103, 112, 79, 0.08))
+            drop-shadow(0 10px 24px rgba(103, 112, 79, 0.18));
+}
+
+.time-box-border,
+.time-box-fill {
+    clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut));
+}
+
+.time-box-border {
+    background: var(--ff-octagon-line, #B5B591);
+}
+
+.time-box-fill {
+    inset: 1px;
+    --inner-cut: max(0px, calc(var(--cut) - 1px));
+    clip-path: polygon(var(--inner-cut) 0, calc(100% - var(--inner-cut)) 0, 100% var(--inner-cut), 100% calc(100% - var(--inner-cut)), calc(100% - var(--inner-cut)) 100%, var(--inner-cut) 100%, 0 calc(100% - var(--inner-cut)), 0 var(--inner-cut));
+    background: var(--panel);
+}
+
+.timeline-viewport {
+    position: absolute;
+    z-index: 2;
+    overflow: hidden;
+    outline: 0;
+    touch-action: none;
+    cursor: grab;
+}
+
+.timeline-viewport.dragging {
+    cursor: grabbing;
+}
+
+.timeline-nodes,
+.timeline-labels {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.timeline-leaf {
+    position: absolute;
+    display: block;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    object-fit: contain;
+    object-position: center;
+    pointer-events: none;
+}
+
+.time-icon {
+    z-index: 4;
+    transform: translate(-50%, -50%);
+}
+
+.memory-dropdown {
+    position: absolute;
+    z-index: 8;
+    overflow: hidden;
+    padding: 1px;
+    background: var(--ff-octagon-line, #B5B591);
+    clip-path: polygon(7px 0, calc(100% - 7px) 0, 100% 7px, 100% calc(100% - 7px), calc(100% - 7px) 100%, 7px 100%, 0 calc(100% - 7px), 0 7px);
+    filter: drop-shadow(0 3px 7px rgba(103, 112, 79, 0.10))
+            drop-shadow(0 9px 18px rgba(103, 112, 79, 0.14));
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(4px);
+    transition: opacity 120ms ease-out, transform 120ms ease-out, visibility 120ms;
+}
+
+.memory-dropdown-list {
+    display: grid;
+    grid-auto-rows: minmax(30px, auto);
+    overflow: hidden;
+    padding: 2px 0;
+    background: rgba(250, 248, 236, 0.98);
+    clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
+}
+
+.memory-dropdown.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.memory-option {
+    height: var(--memory-option-height, 34px);
+    min-width: 0;
+    margin: 0;
+    padding: 0 10px;
+    border: 0;
+    border-bottom: 1px solid rgba(181, 181, 145, 0.30);
+    background: transparent;
+    color: #5F574D;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    touch-action: manipulation;
+}
+
+.memory-option:last-child { border-bottom: 0; }
+.memory-option:active { background: rgba(181, 181, 145, 0.14); }
+.home.duration-locked .timeline-viewport{pointer-events:none;cursor:default}.home.duration-locked #lockButton{filter:brightness(.82) saturate(1.16) drop-shadow(0 0 3px rgba(101,118,78,.28))}#lockButton.play-lock-feedback{animation:durationLockFeedback 320ms cubic-bezier(.22,1,.36,1)}@keyframes durationLockFeedback{0%{transform:translate(-50%,-50%) scale(1)}42%{transform:translate(-50%,-50%) scale(1.16)}100%{transform:translate(-50%,-50%) scale(1)}}
