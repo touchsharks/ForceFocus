@@ -23,3 +23,11 @@ adb shell pm enable com.forcefocus.app/com.forcefocus.app.ForceFocusAccessibilit
 ```
 
 Phone acceptance still required: reboot discards focus without consuming early exit; uninstall confirmation/settings remain reachable; no overlay required; actual service enable-state stability is not claimed solved by this release.
+
+## Build verification
+
+Gradle assembleDebug + lintDebug passed. JS session restoration, weekly early exit and app exclusion regression tests passed. APK DEX contains 39 classes including the actual service and SystemEscapePolicy; every Manifest component has an implementation. 245 of 246 assets are byte-identical to 0.3.2; only focus.js restoration behavior changed. Signature verified, same fc56a1cbdeed6729667358a436d4cc8d470a7d6b3d6b36a05dd79efab1789306 certificate as 0.3.1/0.3.2.
+
+APK SHA256: de676745b3e5e5b0e3dddbcbe7bf09a72bedfddabbceb1bc545e2334458b66d8.
+
+Phone tests have not been performed in this workspace.
