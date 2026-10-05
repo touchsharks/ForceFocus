@@ -564,14 +564,17 @@ function enterFocus(task, minutes) {
     callNative("enterFocus", task, minutes);
 }
 function onModeIconClick() { callNative("onModeIconClick"); }
-function onSidebarClick() {
+function playSidebarFeedback() {
     const button = $("#sidebarButton");
-    if (button) {
+    if (button && !button.classList.contains("play-sidebar-feedback")) {
         button.classList.remove("play-sidebar-feedback");
         void button.offsetWidth;
         button.classList.add("play-sidebar-feedback");
         window.setTimeout(() => button.classList.remove("play-sidebar-feedback"), 160);
     }
+}
+function onSidebarClick() {
+    playSidebarFeedback();
     if (window.ForceFocusSidebar && typeof window.ForceFocusSidebar.open === "function") {
         window.ForceFocusSidebar.open();
         return;
@@ -853,6 +856,8 @@ window.setForceFocusMetrics = value => {
 window.getForceFocusMetrics = () => metrics;
 
 function initialize() {
+    const homeStarted = performance.now();
+    requestAnimationFrame(() => setTimeout(() => callNative("logPerformance", "home core first frame", performance.now() - homeStarted), 0));
     metrics = fallbackMetrics();
     createTaskLeaves();
     selectedMinutes = restoreRememberedMinutes();
@@ -866,6 +871,7 @@ function initialize() {
     applyDurationLockState(false);
     if (window.ForceFocusData) window.ForceFocusData.beginHomeVisible();
 
+    $("#sidebarButton").addEventListener("pointerdown", playSidebarFeedback);
     $("#sidebarButton").addEventListener("click", event => { event.stopPropagation(); onSidebarClick(); });
     $("#modeButton").addEventListener("click", event => { event.stopPropagation(); onModeIconClick(); });
     $("#memoryButton").addEventListener("click", event => { event.stopPropagation(); toggleMemoryDropdown(); });

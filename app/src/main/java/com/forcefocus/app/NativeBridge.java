@@ -60,8 +60,10 @@ public final class NativeBridge {
     ));
 
     private final ExecutorService appScanner = Executors.newSingleThreadExecutor();
+    private final AtomicBoolean historyInitializing = new AtomicBoolean();
     private final AtomicBoolean scanRunning = new AtomicBoolean();
     private volatile String installedApps = "[]";
+    private volatile Map<String, JSONObject> appMetadata = Collections.emptyMap();
     private volatile boolean closed;
     private volatile boolean rescanRequested;
     private final BroadcastReceiver packageChanges = new BroadcastReceiver() {
@@ -98,6 +100,7 @@ public final class NativeBridge {
         if (!scanRunning.compareAndSet(false, true)) { rescanRequested = true; return; }
         appScanner.execute(() -> {
             long started = android.os.SystemClock.elapsedRealtime();
+            Log.i("FF_PERF", "app scan start elapsed=" + started);
             try {
                 installedApps = scanInstalledApps();
                 webView.post(() -> {
@@ -110,6 +113,12 @@ public final class NativeBridge {
                 if (rescanRequested && !closed) { rescanRequested = false; requestInstalledAppsRefresh(); }
             }
         });
+    }
+
+    @JavascriptInterface
+    public void logPerformance(String stage, double elapsedMs) {
+        Log.i("FF_PERF", stage + " ms=" + elapsedMs + " elapsed=" + android.os.SystemClock.elapsedRealtime());
+        if ("home core first frame".equals(stage)) activity.recordHomeReady();
     }
 
     @JavascriptInterface
@@ -192,6 +201,22 @@ public final class NativeBridge {
     }
 
     @JavascriptInterface
+    public void requestFocusHistoryInitialization(boolean allowPrompt) {
+        if (closed || !historyInitializing.compareAndSet(false, true)) return;
+        FocusHistoryStore.runAsync(() -> {
+            try {
+                JSONObject payload = new JSONObject();
+                payload.put("status", history.initializeHistory());
+                payload.put("allowPrompt", allowPrompt);
+                String script = "window.dispatchEvent(new CustomEvent('forcefocus:native-history-ready',{detail:"
+                        + payload.toString() + "}));";
+                webView.post(() -> { if (!closed) webView.evaluateJavascript(script, null); });
+            } catch (JSONException exception) { Log.e(TAG, "History initialization failed", exception); }
+            finally { historyInitializing.set(false); }
+        });
+    }
+
+    @JavascriptInterface
     public String initializeFocusHistory() {
         return history.initializeHistory().toString();
     }
@@ -213,7 +238,7 @@ public final class NativeBridge {
 
     @JavascriptInterface
     public String getEarlyExitState() {
-        return state.preferences().getString(AppStateRepository.KEY_EARLY_EXIT, "{}");
+        return state.preferences().getString(AppStateRepository.KEY_EARLY_EXIT, "");
     }
 
     @JavascriptInterface
@@ -284,6 +309,7 @@ public final class NativeBridge {
                 unique.put(packageName, value);
             } catch (JSONException ignored) { }
         }
+        appMetadata = new LinkedHashMap<>(unique);
         List<JSONObject> values = new ArrayList<>(unique.values());
         Collator collator = Collator.getInstance(Locale.CHINA);
         Collections.sort(values, (left, right) -> collator.compare(left.optString("name"), right.optString("name")));
@@ -298,6 +324,8 @@ public final class NativeBridge {
         String packageName = packages.isEmpty() ? appId : packages.iterator().next();
         JSONObject result = new JSONObject();
         try {
+            JSONObject cached = appMetadata.get(packageName);
+            if (cached != null) return new JSONObject(cached.toString()).put("id", appId).put("installed", true).toString();
             PackageManager manager = activity.getPackageManager();
             ApplicationInfo info = manager.getApplicationInfo(packageName, 0);
             result.put("id", appId);

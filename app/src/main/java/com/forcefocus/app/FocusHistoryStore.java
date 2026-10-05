@@ -39,23 +39,27 @@ final class FocusHistoryStore {
 
     private final Context context;
     private final SharedPreferences preferences;
+    private final SharedPreferences journal;
 
     FocusHistoryStore(Context context) {
         this.context = context.getApplicationContext();
         this.preferences = new AppStateRepository(context).preferences();
+        this.journal = context.getSharedPreferences("forcefocus_completion_journal_v1", Context.MODE_PRIVATE);
         WRITER.execute(this::recoverPendingRecords);
     }
+
+    static void runAsync(Runnable action) { WRITER.execute(action); }
 
     boolean stageCompletedRecord(JSONObject record, Runnable onSaved) {
         JSONObject normalized = normalizeRecord(record);
         if (normalized == null) return false;
         String key = JOURNAL_PREFIX + normalized.optString("sessionId", normalized.optString("id"));
         // Only the small record is committed before acknowledgement; full merge/backup run off the bridge thread.
-        if (!preferences.edit().putString(key, normalized.toString()).commit()) return false;
+        if (!journal.edit().putString(key, normalized.toString()).commit()) return false;
         WRITER.execute(() -> {
             synchronized (RECORD_LOCK) {
                 addCompletedRecord(normalized);
-                preferences.edit().remove(key).commit();
+                journal.edit().remove(key).commit();
             }
             if (onSaved != null) onSaved.run();
         });
@@ -63,12 +67,12 @@ final class FocusHistoryStore {
     }
 
     private void recoverPendingRecords() {
-        for (Map.Entry<String, ?> entry : preferences.getAll().entrySet()) {
+        for (Map.Entry<String, ?> entry : journal.getAll().entrySet()) {
             if (!entry.getKey().startsWith(JOURNAL_PREFIX) || !(entry.getValue() instanceof String)) continue;
             try {
                 synchronized (RECORD_LOCK) {
                     addCompletedRecord(new JSONObject((String) entry.getValue()));
-                    preferences.edit().remove(entry.getKey()).commit();
+                    journal.edit().remove(entry.getKey()).commit();
                 }
             } catch (JSONException exception) { Log.e(TAG, "Invalid completion journal", exception); }
         }

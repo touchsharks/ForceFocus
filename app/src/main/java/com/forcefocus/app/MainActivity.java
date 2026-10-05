@@ -28,6 +28,7 @@ public final class MainActivity extends Activity {
     private static final String TAG = "ForceFocus";
     private static final String ENTRY = "file:///android_asset/ForceFocus_v16.html";
 
+    private long createdAt;
     private NativeBridge bridge;
     private Bitmap sidebarBitmap;
     private FrameLayout root;
@@ -40,12 +41,16 @@ public final class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        createdAt = android.os.SystemClock.elapsedRealtime();
+        Log.i("FF_PERF", "activity create elapsed=" + createdAt);
         configureWindow();
         buildContent();
         setContentView(root);
         installInsets();
         webView.loadUrl(ENTRY);
     }
+
+    void recordHomeReady() { Log.i("FF_PERF", "activity to home core frame ms=" + (android.os.SystemClock.elapsedRealtime() - createdAt)); }
 
     private void configureWindow() {
         Window window = getWindow();
@@ -101,7 +106,7 @@ public final class MainActivity extends Activity {
                     Bitmap bitmap = loadBitmap("sidebar/侧边栏背景图.png");
                     runOnUiThread(() -> { if (!isDestroyed()) sidebarBitmap = bitmap; });
                 }, "FF-SidebarPreload").start();
-                view.evaluateJavascript("window.ForceFocusData&&window.ForceFocusData.initializeNativeHistory&&window.ForceFocusData.initializeNativeHistory(false);", null);
+                Log.i("FF_PERF", "page finished");
             }
         });
         bridge = new NativeBridge(this, webView);

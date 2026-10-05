@@ -1,0 +1,16 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const source=fs.readFileSync('app/src/main/assets/sidebar/sidebar.js','utf8');
+const sets=source.slice(source.indexOf('const EXCLUDED_LABELS='),source.indexOf('const $='));
+const functions=source.slice(source.indexOf('function normalizedLabel('),source.indexOf('installedCache=filterInstalled('));
+const c={};vm.createContext(c);vm.runInContext(sets+functions,c);
+assert(c.isExcludedApp({id:'com.tencent.mobileqq',name:'renamed QQ'}));
+assert(c.isExcludedApp({id:'unknown.device.package',name:'同程旅行'}));
+assert(c.isExcludedApp({id:'unknown.device.package',name:'同城旅行'}));
+assert(c.isExcludedApp({id:'other',name:' K e e p '}));
+assert(!c.isExcludedApp({id:'com.tencent.androidqqmail',name:'QQ邮箱'}));
+assert(!c.isExcludedApp({id:'com.sinovatech.unicom.ui',name:'中国联通'}));
+assert(!c.isExcludedApp({id:'cn.wps.moffice_eng',name:'WPS'}));
+assert.equal(c.filterInstalled([{id:'com.tencent.mobileqq',name:'renamed'},{id:'cn.wps.moffice_eng',name:'WPS'},{id:'cn.wps.moffice_eng',name:'WPS'}]).length,1);
+const actual=c.filterInstalled(vm.runInContext('Array.from(EXCLUDED_LABELS).map((name,i)=>({id:"test."+i,name}))',c));
+assert.equal(actual.length,0);
+console.log('PASS package blacklist, all labels, label alias, deduplication, allowed apps');

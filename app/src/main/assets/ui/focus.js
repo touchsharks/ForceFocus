@@ -140,7 +140,7 @@
             const nativeValue = bridgeCall("getEarlyExitState");
             if (typeof nativeValue === "string" && nativeValue) parsed = JSON.parse(nativeValue);
         } catch (_error) { /* Fall back to the WebView mirror. */ }
-        if (!parsed) {
+        if (!parsed || !parsed.weekKey) {
             try { parsed = JSON.parse(localStorage.getItem(EARLY_EXIT_WEEK_KEY) || "null"); }
             catch (_error) { parsed = null; }
         }
@@ -636,6 +636,7 @@
     function installBranchGesture() {
         branchHit.addEventListener("pointerdown", event => {
             if (!session || finishLocked || branchGesture) return;
+            refreshEarlyExitLock();
             if (earlyExitLocked) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -899,6 +900,7 @@
     }
 
     function returnHome() {
+        const returnStarted = performance.now();
         window.clearInterval(countdownTimer);
         countdownTimer = 0;
         cancelGestures();
@@ -915,6 +917,7 @@
         if (window.ForceFocusData) window.ForceFocusData.beginHomeVisible();
         bridgeCall("setFocusModeActive", false);
         requestAnimationFrame(() => window.setTimeout(() => {
+            bridgeCall("logPerformance", "focus return first frame", performance.now() - returnStarted);
             if (typeof window.restoreRememberedMinutes === "function"
                     && typeof window.setSelectedMinutes === "function") {
                 window.setSelectedMinutes(window.restoreRememberedMinutes());

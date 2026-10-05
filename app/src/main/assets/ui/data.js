@@ -238,12 +238,25 @@
     function initializeNativeHistory(allowPrompt) {
         const bridge = window.NativeBridge;
         if (!bridge) return;
+        if (typeof bridge.requestFocusHistoryInitialization === "function") {
+            bridge.requestFocusHistoryInitialization(Boolean(allowPrompt));
+            return;
+        }
         let status = null;
         try {
             if (typeof bridge.initializeFocusHistory === "function") {
                 status = JSON.parse(bridge.initializeFocusHistory());
             }
         } catch (_error) { status = null; }
+        finishNativeHistoryInitialization(status, allowPrompt);
+    }
+
+    window.addEventListener("forcefocus:native-history-ready", event => {
+        finishNativeHistoryInitialization(event.detail.status, event.detail.allowPrompt);
+    });
+
+    function finishNativeHistoryInitialization(status, allowPrompt) {
+        const bridge = window.NativeBridge;
         const synced = syncNativeRecords();
         if (synced.changed) {
             window.dispatchEvent(new CustomEvent("forcefocus:records-changed", { detail: { restored: true } }));
