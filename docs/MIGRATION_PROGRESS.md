@@ -1,3 +1,13 @@
+## 当前续做入口：0.3.1-home（2026-10-06）
+
+用户要求补齐0.2.26→0.2.27性能/白名单/每周两次提前结束处理，已完成代码及标准构建，提交34e49f0400d2fb58498b2791efb36a8df3797bfe；详见PERFORMANCE_UPDATE.md。4个JS仅改行为，HTML/CSS/图片未改。Gradle assembleDebug/lintDebug通过，0错误12警告，37 DEX类，所有Manifest组件存在，246assets验证通过。
+
+新版APK ForceFocus-0.3.1-home-gradle.apk，library_file_id=libfile_e2ffc4052d0c8191a1b243a36342f05c，file_id=file_000000008b9c81f5a1a61bb2c621c068；SHA256=98427188f80b7385add212f5b655c221c4d5fe414df99fe4a20cc8a91dbb01a4。
+
+阻塞：手机实际0.2.27证书27b6c4...，新版fc56a1cb...，已通过adb明确UPDATE_INCOMPATIBLE。找到的旧密钥均不匹配，run-as提示not debuggable，用户表示没有导出入口。用户还未授权卸载、改包名或丢失数据。不要重复让用户安装同签名不匹配的新包。实机速度、服务稳定开启、logcat及白名单阻断仍未验收。
+
+---
+
 # ForceFocus migration checkpoint — 2026-10-06
 
 ## Durable continuation sources
