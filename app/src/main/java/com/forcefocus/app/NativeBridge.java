@@ -104,14 +104,15 @@ public final class NativeBridge {
         long end = parseLong(endValue);
         JSONObject record = baseRecord(task, plannedMinutes, start, end, actualSeconds, reason);
         history.addCompletedRecord(record);
-        state.setFocusActive(false);
+        state.completeIfCurrent(record.optString("sessionId"));
     }
 
     @JavascriptInterface
     public void completeFocusSessionV2(String recordJson) {
         try {
-            history.addCompletedRecord(new JSONObject(recordJson == null ? "{}" : recordJson));
-            state.setFocusActive(false);
+            JSONObject record = new JSONObject(recordJson == null ? "{}" : recordJson);
+            history.addCompletedRecord(record);
+            state.completeIfCurrent(record.optString("sessionId", record.optString("id")));
         } catch (JSONException exception) {
             Log.e(TAG, "Invalid focus record", exception);
         }
@@ -261,7 +262,7 @@ public final class NativeBridge {
         Intent launch = activity.getPackageManager().getLaunchIntentForPackage(packageName.trim());
         if (launch == null) return false;
         launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        try { activity.startActivity(launch); return true; }
+        try { activity.startActivity(launch); state.registerWhitelistLaunch(packageName.trim()); return true; }
         catch (RuntimeException exception) { return false; }
     }
 

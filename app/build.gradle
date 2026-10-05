@@ -5,6 +5,7 @@ plugins {
 android {
     namespace "com.forcefocus.app"
     compileSdk 35
+    buildToolsVersion "35.0.0"
 
     defaultConfig {
         applicationId "com.forcefocus.app"
@@ -32,4 +33,20 @@ android {
     packaging {
         resources.excludes += ["META-INF/DEPENDENCIES", "META-INF/LICENSE*", "META-INF/NOTICE*"]
     }
+}
+
+// Reject partial checkouts instead of packaging a blank WebView.
+tasks.register('verifyFrozenAssets') {
+    doLast {
+        def expected = new groovy.json.JsonSlurper().parse(rootProject.file('frozen-assets/manifest.json')).files
+        expected.each { relative, hash ->
+            def asset = file("src/main/assets/${relative}")
+            if (!asset.isFile()) throw new GradleException("Missing frozen asset ${relative}. Run tools/restore_frozen_assets.py with the original APK or image ZIP.")
+            def actual = java.security.MessageDigest.getInstance('SHA-256').digest(asset.bytes).encodeHex().toString()
+            if (actual != hash) throw new GradleException("Frozen asset changed: ${relative}")
+        }
+    }
+}
+tasks.configureEach { task ->
+    if (task.name.startsWith('merge') && task.name.endsWith('Assets')) task.dependsOn('verifyFrozenAssets')
 }

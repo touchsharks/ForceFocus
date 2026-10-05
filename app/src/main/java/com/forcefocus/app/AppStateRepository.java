@@ -28,6 +28,7 @@ final class AppStateRepository {
     static final String KEY_WHITELIST = "forcefocus_whitelist";
     static final String KEY_WHITELIST_PACKAGES = "forcefocus_whitelist_packages";
     static final String KEY_SESSION_ID = "forcefocus_session_id";
+    static final String KEY_WHITELIST_CLICKS = "forcefocus_whitelist_click_count";
     static final String KEY_EARLY_EXIT = "forcefocus_early_exit_week_v1";
     static final String KEY_MARKED_DATES = "forcefocus_calendar_marked_dates";
     static final String KEY_BACKUP_TREE = "forcefocus_history_backup_tree_uri";
@@ -75,6 +76,8 @@ final class AppStateRepository {
         String taskId = taskName != null && taskName.equals(preferences.getString(KEY_TASK, ""))
                 ? preferences.getString(KEY_TASK_ID, taskIdForName(taskName)) : taskIdForName(taskName);
         String sessionId = start + "-" + (taskId.isEmpty() ? taskName : taskId);
+        int clicks = preferences.getLong(KEY_START, 0L) == start
+                ? preferences.getInt(KEY_WHITELIST_CLICKS, 0) : 0;
         String normalizedWhitelist = packagesAsJson(resolvePackageSet(whitelistJson));
         preferences.edit()
                 .putBoolean(KEY_FOCUS_ACTIVE, true)
@@ -86,6 +89,7 @@ final class AppStateRepository {
                 .putString(KEY_WHITELIST, whitelistJson == null ? "[]" : whitelistJson)
                 .putString(KEY_WHITELIST_PACKAGES, normalizedWhitelist)
                 .putString(KEY_SESSION_ID, sessionId)
+                .putInt(KEY_WHITELIST_CLICKS, clicks)
                 .commit();
     }
 
@@ -121,9 +125,21 @@ final class AppStateRepository {
                     .remove(KEY_END)
                     .remove(KEY_WHITELIST)
                     .remove(KEY_WHITELIST_PACKAGES)
-                    .remove(KEY_SESSION_ID);
+                    .remove(KEY_SESSION_ID)
+                    .remove(KEY_WHITELIST_CLICKS);
         }
         editor.commit();
+    }
+
+    void completeIfCurrent(String sessionId) {
+        if (sessionId != null && sessionId.equals(currentSessionId())) setFocusActive(false);
+    }
+
+    void registerWhitelistLaunch(String packageName) {
+        if (isFocusActive() && currentWhitelistPackages().contains(packageName)) {
+            preferences.edit().putInt(KEY_WHITELIST_CLICKS,
+                    preferences.getInt(KEY_WHITELIST_CLICKS, 0) + 1).commit();
+        }
     }
 
     String restoreFocusSessionJson() {
@@ -139,6 +155,7 @@ final class AppStateRepository {
             value.put("startTimestamp", start);
             value.put("endTimestamp", end);
             value.put("sessionId", preferences.getString(KEY_SESSION_ID, ""));
+            value.put("whitelistClickCount", preferences.getInt(KEY_WHITELIST_CLICKS, 0));
             value.put("whitelist", new JSONArray(preferences.getString(KEY_WHITELIST, "[]")));
             return value.toString();
         } catch (JSONException exception) {

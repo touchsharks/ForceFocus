@@ -31,6 +31,8 @@ import java.util.Map;
 final class FocusHistoryStore {
     private static final String TAG = "FF_HISTORY";
     private static final int MAX_RECORDS = 1000;
+    private static final Object RECORD_LOCK = new Object();
+    private static final Object BACKUP_IO_LOCK = new Object();
     private static final String BACKUP_FILE_NAME = "forcefocus_history_backup.json";
 
     private final Context context;
@@ -46,20 +48,24 @@ final class FocusHistoryStore {
     }
 
     synchronized JSONArray addCompletedRecord(JSONObject candidate) {
+        synchronized (RECORD_LOCK) {
         JSONObject normalized = normalizeRecord(candidate);
         if (normalized == null) return getRecords();
         JSONArray merged = merge(getRecords(), new JSONArray().put(normalized));
         saveRecords(merged);
         backupAsync();
         return merged;
+        }
     }
 
     synchronized JSONArray importRecords(String json) {
+        synchronized (RECORD_LOCK) {
         JSONArray incoming = parseArray(json);
         JSONArray merged = merge(getRecords(), incoming);
         saveRecords(merged);
         backupAsync();
         return merged;
+        }
     }
 
     synchronized JSONObject calendarMinutes(String monthKey) {
@@ -142,6 +148,7 @@ final class FocusHistoryStore {
         Uri tree = savedTreeUri();
         if (tree == null) return;
         new Thread(() -> {
+            synchronized (BACKUP_IO_LOCK) {
             try {
                 JSONArray snapshot = getRecords();
                 JSONObject backup = new JSONObject();
@@ -158,6 +165,7 @@ final class FocusHistoryStore {
                 Log.i(TAG, "backup complete records=" + snapshot.length());
             } catch (Exception exception) {
                 Log.e(TAG, "backup failed", exception);
+            }
             }
         }, "ForceFocusHistoryBackup").start();
     }
