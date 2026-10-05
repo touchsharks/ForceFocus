@@ -16,7 +16,7 @@ public final class FocusDeadlineReceiver extends BroadcastReceiver {
         AlarmManager alarms = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (alarms == null) return;
         PendingIntent operation = PendingIntent.getBroadcast(context, 4108,
-                new Intent(context, FocusDeadlineReceiver.class),
+                new Intent(context, FocusDeadlineReceiver.class).setAction("com.forcefocus.app.FOCUS_DEADLINE"),
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         alarms.cancel(operation);
         if (!state.isFocusActive()) return;
@@ -65,6 +65,11 @@ public final class FocusDeadlineReceiver extends BroadcastReceiver {
     }
 
     @Override public void onReceive(Context context, Intent intent) {
+        String action = intent == null ? null : intent.getAction();
+        if (!"com.forcefocus.app.FOCUS_DEADLINE".equals(action)
+                && !Intent.ACTION_BOOT_COMPLETED.equals(action)
+                && !Intent.ACTION_MY_PACKAGE_REPLACED.equals(action)
+                && !"android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED".equals(action)) return;
         finishIfDue(context);
         schedule(context);
     }

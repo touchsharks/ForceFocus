@@ -82,6 +82,20 @@ def manifest_components(data):
     return package, components
 
 
+def asset_hashes(archive):
+    result = {}
+    for info in archive.infolist():
+        name = info.filename
+        # AGP zipflinger writes UTF-8 filename bytes without always setting bit 11.
+        # Android and Java read those bytes as UTF-8; Python otherwise assumes CP437.
+        if not info.flag_bits & 0x800:
+            try: name = name.encode('cp437').decode('utf-8')
+            except (UnicodeEncodeError, UnicodeDecodeError): pass
+        if name.startswith('assets/') and not name.endswith('/'):
+            result[name[7:]] = hashlib.sha256(archive.read(info)).hexdigest()
+    return result
+
+
 def verify(apk_path, manifest_path, baseline):
     with zipfile.ZipFile(apk_path) as apk:
         definitions = sorted({name for path in apk.namelist() if path.startswith('classes') and path.endswith('.dex')
@@ -94,14 +108,12 @@ def verify(apk_path, manifest_path, baseline):
                     'com.forcefocus.app.ForceFocusAccessibilityService', 'com.forcefocus.app.HistoryBackupActivity',
                     'com.forcefocus.app.FocusDeadlineReceiver'}
         assert required <= set(definitions), f'Missing native classes: {required - set(definitions)}'
-        assets = {path[7:]: hashlib.sha256(apk.read(path)).hexdigest() for path in apk.namelist()
-                  if path.startswith('assets/') and not path.endswith('/')}
+        assets = asset_hashes(apk)
         expected = json.loads(pathlib.Path(manifest_path).read_text())['files']
         assert assets == expected, 'Packaged assets differ from frozen manifest'
         if baseline:
             with zipfile.ZipFile(baseline) as old:
-                old_assets = {path[7:]: hashlib.sha256(old.read(path)).hexdigest() for path in old.namelist()
-                              if path.startswith('assets/') and not path.endswith('/')}
+                old_assets = asset_hashes(old)
                 assert assets == old_assets, 'Packaged assets differ from original APK'
     return {'apk': str(apk_path), 'sha256': hashlib.sha256(pathlib.Path(apk_path).read_bytes()).hexdigest(),
             'packageName': package, 'manifestComponents': components, 'dexClasses': definitions,

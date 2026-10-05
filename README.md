@@ -43,17 +43,17 @@ python3 tools/validate_project.py --assets app-assets
 
 构建结果位于 `app/build/outputs/apk/`。发布版本应通过标准 Gradle signingConfig 使用私有密钥签名，密钥不得提交。
 
-## GitHub 建议
+## 从 GitHub 恢复完整资源
 
-本仓库配置 Git LFS 管理 PNG/JPG 等大体积素材。首次提交前执行：
+源码与构建配置已保存到 GitHub；229 个冻结图片资源的上传尚未完成。
+恢复原始图片包 `ForceFocus-frozen-image-assets-0.2.27.zip` 后执行：
 
 ```bash
-git lfs install
-git add .
-git commit -m "Migrate ForceFocus to Android Gradle project"
-git branch -M main
-git remote add origin <你的 GitHub 仓库地址>
-git push -u origin main
+python3 tools/restore_frozen_assets.py /path/to/ForceFocus-frozen-image-assets-0.2.27.zip
+./gradlew :app:assembleDebug
+python3 tools/verify_apk.py app/build/outputs/apk/debug/app-debug.apk
 ```
 
-最终 APK 建议放在 GitHub Releases；签名私钥和密码不得上传。当前仓库未附加开源许可证，推送前请根据素材权属决定是否公开及采用何种许可证。
+完整工程 ZIP 已包含原始图片，无须执行恢复步骤。资源包的持久标识和最新验收状态见 `docs/MIGRATION_PROGRESS.md`。
+
+目前交付 APK 使用测试签名。覆盖安装旧版需同一签名证书；当前尚未取得旧版私钥。无障碍保持开启、真实 logcat、白名单阻断及实机视觉验收尚未完成，不能据静态检查宣称实机修复成功。

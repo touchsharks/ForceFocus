@@ -41,7 +41,16 @@ public final class HistoryBackupActivity extends Activity {
             Uri uri = data.getData();
             int flags = data.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             try {
-                getContentResolver().takePersistableUriPermission(uri, flags);
+                if (flags == (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION)) {
+                    getContentResolver().takePersistableUriPermission(uri,
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                } else if (flags == Intent.FLAG_GRANT_READ_URI_PERMISSION) {
+                    getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                } else if (flags == Intent.FLAG_GRANT_WRITE_URI_PERMISSION) {
+                    getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                } else {
+                    throw new SecurityException("No backup folder URI grant received");
+                }
                 FocusHistoryStore store = new FocusHistoryStore(this);
                 store.rememberTree(uri);
                 store.restoreFromTree(uri);

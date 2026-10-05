@@ -82,7 +82,7 @@ final class FocusHistoryStore {
             try { day = Integer.parseInt(dateKey.substring(8, 10)); }
             catch (NumberFormatException exception) { continue; }
             long actual = Math.max(0L, value.optLong("actualFocusedSeconds", value.optLong("actualSeconds", 0L)));
-            seconds.put(day, seconds.getOrDefault(day, 0L) + actual);
+            seconds.put(day, (seconds.containsKey(day) ? seconds.get(day) : 0L) + actual);
         }
         for (Map.Entry<Integer, Long> entry : seconds.entrySet()) {
             try { result.put(String.valueOf(entry.getKey()), Math.round(entry.getValue() / 60.0)); }
@@ -229,7 +229,9 @@ final class FocusHistoryStore {
         appendNormalized(unique, existing);
         appendNormalized(unique, incoming);
         List<JSONObject> values = new ArrayList<>(unique.values());
-        values.sort(Comparator.comparingLong(value -> value.optLong("startTime", value.optLong("startedAt", 0L))));
+        Collections.sort(values, (left, right) -> Long.compare(
+                left.optLong("startTime", left.optLong("startedAt", 0L)),
+                right.optLong("startTime", right.optLong("startedAt", 0L))));
         if (values.size() > MAX_RECORDS) values = values.subList(values.size() - MAX_RECORDS, values.size());
         JSONArray result = new JSONArray();
         for (JSONObject value : values) result.put(value);

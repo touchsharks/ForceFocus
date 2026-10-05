@@ -20,12 +20,18 @@
 - Recovered from GitHub and image ZIP after temporary runtime was replaced.
 - All 246 restored assets match the frozen SHA-256 manifest.
 - Direct Gradle dependency download now works through the managed proxy with its CA certificate.
-- Standard assembleDebug is pending JDK completion and APK verification.
+- Standard :app:assembleDebug succeeded with JDK 17 and Build Tools 35.0.0.
+- Actual APK verification passed: 25 DEX classes, all 4 Manifest components implemented, all 246 assets unchanged.
+- APK signature verification passed v1 and v2; current certificate is Android Debug.
+- APK SHA-256: 4c97e98cfeadb0282b17c08fc0598449cb1fd18a934040dabc414926cfa55ce3.
+- assembleDebug + lintDebug passed; no lint errors.
+- Fixed vibration permission, API 23 collections/style compatibility and backup URI grant constants.
+- Permission visibility uses existing launcher-app queries instead of QUERY_ALL_PACKAGES.
 - Last build log: /workspace/scratch/23c46a324859/toolchain/build.log.
 - Working root: /workspace/scratch/23c46a324859/forcefocus.
 
 ## Still required
-- Successful Gradle APK and real DEX check, signed APK verification.
+- Save final APK and complete source archive.
 - Confirm new signer matches installed APK before attempting an update; old private signing key is not available.
 - Physical phone service-enable test, FF_A11Y lifecycle logcat, per-task allowed/blocked apps, visual regression.
 - No device was connected and no physical-phone evidence exists yet.

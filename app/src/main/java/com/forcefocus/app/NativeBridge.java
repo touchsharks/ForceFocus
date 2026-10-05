@@ -226,7 +226,7 @@ public final class NativeBridge {
         }
         List<JSONObject> values = new ArrayList<>(unique.values());
         Collator collator = Collator.getInstance(Locale.CHINA);
-        values.sort((left, right) -> collator.compare(left.optString("name"), right.optString("name")));
+        Collections.sort(values, (left, right) -> collator.compare(left.optString("name"), right.optString("name")));
         JSONArray result = new JSONArray();
         for (JSONObject value : values) result.put(value);
         return result.toString();
