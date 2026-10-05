@@ -1,3 +1,11 @@
+## 0.3.2 无障碍独立开启排查（当前优先任务）
+
+用户已在新Gradle包上实机反馈服务连接后关闭，要求不依赖无障碍悬浮快捷按钮，导航强限制修改暂停。完整日志和dumpsys确认连接后在返回设置时销毁，服务已从Enabled列表消失，Crashed为空；未定位具体取消启用的调用者。
+
+0.3.2（versionCode32）只改原生Service/XML：去掉连接时冗余setServiceInfo和flagReportViewIds，服务onCreate不调度定时任务；新增只读系统启用状态观察、onUnbind/销毁阶段日志。所有246assets与0.3.1完全相同，标准Gradle编译/lint与DEX检查通过。仍不得宣称实机修复成功。下一步同签名覆盖当前Gradle包，不卸载，悬浮按钮关闭情况下开启返回测试；如仍关闭，采集FF_A11Y新日志。详见verification/device-service-disconnect-0.3.2.md。
+
+---
+
 ## 当前续做入口：0.3.1-home（2026-10-06）
 
 用户要求补齐0.2.26→0.2.27性能/白名单/每周两次提前结束处理，已完成代码及标准构建，提交34e49f0400d2fb58498b2791efb36a8df3797bfe；详见PERFORMANCE_UPDATE.md。4个JS仅改行为，HTML/CSS/图片未改。Gradle assembleDebug/lintDebug通过，0错误12警告，37 DEX类，所有Manifest组件存在，246assets验证通过。
