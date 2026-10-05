@@ -31,7 +31,8 @@
 - Working root: /workspace/scratch/23c46a324859/forcefocus.
 
 ## Still required
-- Save final APK and complete source archive.
+- Final APK saved: ForceFocus-0.3.0-home-gradle-debug.apk, Library ID libfile_1b4d9e1ea04c8191ac3382ab8119b3f5, file ID file_00000000044881fbbf8ba2f8361ccaa1.
+- Complete source archive: ForceFocus-0.3.0-Android-Gradle-project.zip (includes all 246 raw assets).
 - Confirm new signer matches installed APK before attempting an update; old private signing key is not available.
 - Physical phone service-enable test, FF_A11Y lifecycle logcat, per-task allowed/blocked apps, visual regression.
 - No device was connected and no physical-phone evidence exists yet.
