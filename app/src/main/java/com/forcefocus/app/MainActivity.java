@@ -28,6 +28,8 @@ public final class MainActivity extends Activity {
     private static final String TAG = "ForceFocus";
     private static final String ENTRY = "file:///android_asset/ForceFocus_v16.html";
 
+    private NativeBridge bridge;
+    private Bitmap sidebarBitmap;
     private FrameLayout root;
     private WebView webView;
     private View statusOverlay;
@@ -94,10 +96,16 @@ public final class MainActivity extends Activity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 pushMetrics();
+                bridge.requestInstalledAppsRefresh();
+                if (sidebarBitmap == null) new Thread(() -> {
+                    Bitmap bitmap = loadBitmap("sidebar/侧边栏背景图.png");
+                    runOnUiThread(() -> { if (!isDestroyed()) sidebarBitmap = bitmap; });
+                }, "FF-SidebarPreload").start();
                 view.evaluateJavascript("window.ForceFocusData&&window.ForceFocusData.initializeNativeHistory&&window.ForceFocusData.initializeNativeHistory(false);", null);
             }
         });
-        webView.addJavascriptInterface(new NativeBridge(this, webView), "NativeBridge");
+        bridge = new NativeBridge(this, webView);
+        webView.addJavascriptInterface(bridge, "NativeBridge");
         root.addView(webView, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
@@ -150,7 +158,8 @@ public final class MainActivity extends Activity {
     void setSidebarSystemBarsVisible(boolean visible) {
         runOnUiThread(() -> {
             if (visible) {
-                Bitmap sidebar = loadBitmap("sidebar/侧边栏背景图.png");
+                if (sidebarBitmap == null) sidebarBitmap = loadBitmap("sidebar/侧边栏背景图.png");
+                Bitmap sidebar = sidebarBitmap;
                 SidebarSplitDrawable drawable = new SidebarSplitDrawable(sidebar);
                 statusOverlay.setBackground(drawable);
                 navigationOverlay.setBackground(new SidebarSplitDrawable(sidebar));
@@ -185,6 +194,7 @@ public final class MainActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+        if (bridge != null) bridge.close();
         if (webView != null) {
             webView.removeJavascriptInterface("NativeBridge");
             webView.destroy();

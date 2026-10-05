@@ -31,6 +31,8 @@ import java.util.Map;
 final class FocusHistoryStore {
     private static final String TAG = "FF_HISTORY";
     private static final int MAX_RECORDS = 1000;
+    private static final String JOURNAL_PREFIX = "forcefocus_pending_record_";
+    private static final java.util.concurrent.ExecutorService WRITER = java.util.concurrent.Executors.newSingleThreadExecutor();
     private static final Object RECORD_LOCK = new Object();
     private static final Object BACKUP_IO_LOCK = new Object();
     private static final String BACKUP_FILE_NAME = "forcefocus_history_backup.json";
@@ -41,13 +43,42 @@ final class FocusHistoryStore {
     FocusHistoryStore(Context context) {
         this.context = context.getApplicationContext();
         this.preferences = new AppStateRepository(context).preferences();
+        WRITER.execute(this::recoverPendingRecords);
     }
 
-    synchronized JSONArray getRecords() {
+    boolean stageCompletedRecord(JSONObject record, Runnable onSaved) {
+        JSONObject normalized = normalizeRecord(record);
+        if (normalized == null) return false;
+        String key = JOURNAL_PREFIX + normalized.optString("sessionId", normalized.optString("id"));
+        // Only the small record is committed before acknowledgement; full merge/backup run off the bridge thread.
+        if (!preferences.edit().putString(key, normalized.toString()).commit()) return false;
+        WRITER.execute(() -> {
+            synchronized (RECORD_LOCK) {
+                addCompletedRecord(normalized);
+                preferences.edit().remove(key).commit();
+            }
+            if (onSaved != null) onSaved.run();
+        });
+        return true;
+    }
+
+    private void recoverPendingRecords() {
+        for (Map.Entry<String, ?> entry : preferences.getAll().entrySet()) {
+            if (!entry.getKey().startsWith(JOURNAL_PREFIX) || !(entry.getValue() instanceof String)) continue;
+            try {
+                synchronized (RECORD_LOCK) {
+                    addCompletedRecord(new JSONObject((String) entry.getValue()));
+                    preferences.edit().remove(entry.getKey()).commit();
+                }
+            } catch (JSONException exception) { Log.e(TAG, "Invalid completion journal", exception); }
+        }
+    }
+
+    JSONArray getRecords() {
         return parseArray(preferences.getString(AppStateRepository.KEY_RECORDS, "[]"));
     }
 
-    synchronized JSONArray addCompletedRecord(JSONObject candidate) {
+    JSONArray addCompletedRecord(JSONObject candidate) {
         synchronized (RECORD_LOCK) {
         JSONObject normalized = normalizeRecord(candidate);
         if (normalized == null) return getRecords();
@@ -58,7 +89,7 @@ final class FocusHistoryStore {
         }
     }
 
-    synchronized JSONArray importRecords(String json) {
+    JSONArray importRecords(String json) {
         synchronized (RECORD_LOCK) {
         JSONArray incoming = parseArray(json);
         JSONArray merged = merge(getRecords(), incoming);
@@ -68,7 +99,7 @@ final class FocusHistoryStore {
         }
     }
 
-    synchronized JSONObject calendarMinutes(String monthKey) {
+    JSONObject calendarMinutes(String monthKey) {
         JSONObject result = new JSONObject();
         if (monthKey == null || !monthKey.matches("\\d{4}-\\d{2}")) return result;
         Map<Integer, Long> seconds = new LinkedHashMap<>();
@@ -91,7 +122,7 @@ final class FocusHistoryStore {
         return result;
     }
 
-    synchronized JSONObject initializeHistory() {
+    JSONObject initializeHistory() {
         JSONObject status = new JSONObject();
         try {
             Uri tree = savedTreeUri();
@@ -117,17 +148,19 @@ final class FocusHistoryStore {
         return status;
     }
 
-    synchronized int restoreFromTree(Uri treeUri) throws IOException {
+    int restoreFromTree(Uri treeUri) throws IOException {
         rememberTree(treeUri);
         Uri file = findBackupFile(treeUri, false);
         if (file == null) return 0;
         String json = readAll(context.getContentResolver(), file);
+        synchronized (RECORD_LOCK) {
         JSONArray before = getRecords();
         JSONArray restored = parseBackup(json);
         JSONArray merged = merge(before, restored);
         saveRecords(merged);
         backupAsync();
         return Math.max(0, merged.length() - before.length());
+        }
     }
 
     void rememberTree(Uri uri) {
@@ -140,8 +173,8 @@ final class FocusHistoryStore {
         return value.isEmpty() ? null : Uri.parse(value);
     }
 
-    private synchronized void saveRecords(JSONArray records) {
-        preferences.edit().putString(AppStateRepository.KEY_RECORDS, records.toString()).commit();
+    private void saveRecords(JSONArray records) {
+        if (!preferences.edit().putString(AppStateRepository.KEY_RECORDS, records.toString()).commit()) throw new IllegalStateException("History disk write failed; journal retained");
     }
 
     private void backupAsync() {

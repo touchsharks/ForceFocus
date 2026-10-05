@@ -151,7 +151,7 @@
     function writeEarlyExitState(state) {
         const normalized = { weekKey: currentWeekKey(), earlyExitCount: Math.max(0, Math.floor(Number(state.earlyExitCount) || 0)) };
         try { localStorage.setItem(EARLY_EXIT_WEEK_KEY, JSON.stringify(normalized)); } catch (_error) { /* Native mirror may remain. */ }
-        window.setTimeout(() => bridgeCall("saveEarlyExitState", JSON.stringify(normalized)), 0);
+        bridgeCall("saveEarlyExitState", JSON.stringify(normalized));
         return normalized;
     }
 
@@ -497,14 +497,14 @@
         try { localStorage.setItem(LOCAL_SESSION_KEY, JSON.stringify(session)); } catch (_error) { /* Native storage remains authoritative. */ }
         const snapshot = session ? { ...session, whitelist: [...session.whitelist] } : null;
         if (!snapshot) return;
-        window.setTimeout(() => bridgeCall(
+        bridgeCall(
             "saveFocusSession",
             snapshot.task,
             snapshot.totalMinutes,
             String(snapshot.startTimestamp),
             String(snapshot.endTimestamp),
             JSON.stringify(snapshot.whitelist)
-        ), 0);
+        );
     }
 
     function restoreSession() {
@@ -548,12 +548,10 @@
             taskName: session.task,
             whitelist: session.whitelist.slice(0, 2)
         });
-        requestAnimationFrame(() => window.setTimeout(() => {
-            bridgeCall("setFocusSessionPolicy", policy);
-            bridgeCall("setFocusModeActive", true);
-        }, 0));
-        if (window.ForceFocusData) window.ForceFocusData.endHomeVisible();
         if (!restored) persistSession();
+        bridgeCall("setFocusSessionPolicy", policy);
+        bridgeCall("setFocusModeActive", true);
+        if (window.ForceFocusData) window.ForceFocusData.endHomeVisible();
         startCountdown();
     }
 
@@ -857,13 +855,19 @@
         try { localStorage.setItem(PENDING_COMPLETION_KEY, JSON.stringify(completedRecord)); } catch (_error) { /* Best-effort crash journal. */ }
         try { localStorage.removeItem(LOCAL_SESSION_KEY); } catch (_error) { /* Native session has already been cleared. */ }
         returnHome();
-        window.setTimeout(() => {
+        requestAnimationFrame(() => window.setTimeout(() => {
             if (reason !== "branch") bridgeCall("performFocusHaptic", "complete");
             persistCompletedRecord(completedRecord);
-        }, 0);
+        }, 0));
     }
 
     function persistCompletedRecord(completedRecord) {
+        if (window.NativeBridge && typeof window.NativeBridge.queueCompletedFocusSession === "function") {
+            if (bridgeCall("queueCompletedFocusSession", JSON.stringify(completedRecord))) {
+                try { localStorage.removeItem(PENDING_COMPLETION_KEY); } catch (_error) { /* Native journal is durable. */ }
+            }
+            return;
+        }
         const hasNativeHistory = window.NativeBridge
             && typeof window.NativeBridge.completeFocusSessionV2 === "function";
         if (hasNativeHistory) {
@@ -909,8 +913,8 @@
         home.classList.remove("focus-early-exit-locked");
         renderSpider();
         if (window.ForceFocusData) window.ForceFocusData.beginHomeVisible();
+        bridgeCall("setFocusModeActive", false);
         requestAnimationFrame(() => window.setTimeout(() => {
-            bridgeCall("setFocusModeActive", false);
             if (typeof window.restoreRememberedMinutes === "function"
                     && typeof window.setSelectedMinutes === "function") {
                 window.setSelectedMinutes(window.restoreRememberedMinutes());

@@ -230,6 +230,11 @@
         }
     }
 
+    window.addEventListener("forcefocus:native-records-ready", () => {
+        const result = syncNativeRecords();
+        if (result.changed) window.dispatchEvent(new CustomEvent("forcefocus:records-changed"));
+    });
+
     function initializeNativeHistory(allowPrompt) {
         const bridge = window.NativeBridge;
         if (!bridge) return;

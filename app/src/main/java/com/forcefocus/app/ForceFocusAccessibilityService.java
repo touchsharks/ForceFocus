@@ -48,6 +48,12 @@ public final class ForceFocusAccessibilityService extends AccessibilityService {
         FocusDeadlineReceiver.finishIfDue(getApplicationContext());
         if (packageName.isEmpty() || repository == null || !repository.isFocusActive()) return;
         if (getPackageName().equals(packageName)) return;
+        // Keep Android security settings and the lock screen under system control.
+        android.app.KeyguardManager keyguard = (android.app.KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+        if (keyguard != null && keyguard.isKeyguardLocked()) return;
+        if ("com.android.systemui".equals(packageName) || "com.android.settings".equals(packageName)
+                || "com.android.permissioncontroller".equals(packageName)
+                || "com.google.android.permissioncontroller".equals(packageName)) return;
         Set<String> allowed = repository.currentWhitelistPackages();
         if (allowed.contains(packageName)) return;
 

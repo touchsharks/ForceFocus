@@ -3,6 +3,11 @@ package com.forcefocus.app;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.AlarmManager;
 import android.content.ComponentName;
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicBoolean;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -54,6 +59,14 @@ public final class NativeBridge {
             "解压专家", "钱包", "铁路12306", "闲鱼", "高德地图", "鲨鱼记账"
     ));
 
+    private final ExecutorService appScanner = Executors.newSingleThreadExecutor();
+    private final AtomicBoolean scanRunning = new AtomicBoolean();
+    private volatile String installedApps = "[]";
+    private volatile boolean closed;
+    private volatile boolean rescanRequested;
+    private final BroadcastReceiver packageChanges = new BroadcastReceiver() {
+        @Override public void onReceive(Context context, Intent intent) { requestInstalledAppsRefresh(); }
+    };
     private final MainActivity activity;
     private final WebView webView;
     private final AppStateRepository state;
@@ -64,6 +77,39 @@ public final class NativeBridge {
         this.webView = webView;
         this.state = new AppStateRepository(activity);
         this.history = new FocusHistoryStore(activity);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_PACKAGE_ADDED);
+        filter.addAction(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
+        filter.addDataScheme("package");
+        if (Build.VERSION.SDK_INT >= 33) activity.registerReceiver(packageChanges, filter, Context.RECEIVER_NOT_EXPORTED);
+        else activity.registerReceiver(packageChanges, filter);
+    }
+
+    synchronized void close() {
+        closed = true;
+        activity.unregisterReceiver(packageChanges);
+        appScanner.shutdown();
+    }
+
+    @JavascriptInterface
+    public synchronized void requestInstalledAppsRefresh() {
+        if (closed) return;
+        if (!scanRunning.compareAndSet(false, true)) { rescanRequested = true; return; }
+        appScanner.execute(() -> {
+            long started = android.os.SystemClock.elapsedRealtime();
+            try {
+                installedApps = scanInstalledApps();
+                webView.post(() -> {
+                    if (!closed) webView.evaluateJavascript("window.dispatchEvent(new Event('forcefocus:installed-apps-ready'));", null);
+                });
+            } catch (RuntimeException exception) { Log.e(TAG, "App scan failed", exception); }
+            finally {
+                scanRunning.set(false);
+                Log.i("FF_PERF", "app scan ms=" + (android.os.SystemClock.elapsedRealtime() - started));
+                if (rescanRequested && !closed) { rescanRequested = false; requestInstalledAppsRefresh(); }
+            }
+        });
     }
 
     @JavascriptInterface
@@ -119,6 +165,18 @@ public final class NativeBridge {
     }
 
     @JavascriptInterface
+    public boolean queueCompletedFocusSession(String recordJson) {
+        try {
+            JSONObject record = new JSONObject(recordJson);
+            boolean staged = history.stageCompletedRecord(record, () -> webView.post(() -> {
+                if (!closed) webView.evaluateJavascript("window.dispatchEvent(new Event('forcefocus:native-records-ready'));", null);
+            }));
+            if (staged) state.completeIfCurrent(record.optString("sessionId", record.optString("id")));
+            return staged;
+        } catch (JSONException exception) { Log.e(TAG, "Invalid completion journal", exception); return false; }
+    }
+
+    @JavascriptInterface
     public String getFocusRecords() {
         return history.getRecords().toString();
     }
@@ -160,7 +218,7 @@ public final class NativeBridge {
 
     @JavascriptInterface
     public void saveEarlyExitState(String json) {
-        state.preferences().edit().putString(AppStateRepository.KEY_EARLY_EXIT, json == null ? "{}" : json).apply();
+        state.preferences().edit().putString(AppStateRepository.KEY_EARLY_EXIT, json == null ? "{}" : json).commit();
     }
 
     @JavascriptInterface
@@ -203,7 +261,9 @@ public final class NativeBridge {
     }
 
     @JavascriptInterface
-    public String getInstalledApps() {
+    public String getInstalledApps() { return installedApps; }
+
+    private String scanInstalledApps() {
         PackageManager manager = activity.getPackageManager();
         Intent launcher = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
         List<ResolveInfo> resolved = manager.queryIntentActivities(launcher, PackageManager.MATCH_ALL);
@@ -214,7 +274,7 @@ public final class NativeBridge {
             if (packageName.equals(activity.getPackageName())) continue;
             CharSequence labelValue = info.loadLabel(manager);
             String label = labelValue == null ? packageName : labelValue.toString().trim();
-            if (EXCLUDED_LABELS.contains(label)) continue;
+            if (EXCLUDED_LABELS.contains(label) || AppCandidatePolicy.isExcluded(packageName, label)) continue;
             try {
                 JSONObject value = new JSONObject();
                 value.put("id", packageName);
@@ -259,6 +319,7 @@ public final class NativeBridge {
     @JavascriptInterface
     public boolean launchPackage(String packageName) {
         if (packageName == null || packageName.trim().isEmpty()) return false;
+        if (state.isFocusActive() && !state.currentWhitelistPackages().contains(packageName.trim())) return false;
         Intent launch = activity.getPackageManager().getLaunchIntentForPackage(packageName.trim());
         if (launch == null) return false;
         launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
