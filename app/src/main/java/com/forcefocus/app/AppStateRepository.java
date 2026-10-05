@@ -43,9 +43,11 @@ final class AppStateRepository {
     }
 
     private final SharedPreferences preferences;
+    private final Context context;
 
     AppStateRepository(Context context) {
-        preferences = context.getApplicationContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
+        this.context = context.getApplicationContext();
+        preferences = this.context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
     }
 
     SharedPreferences preferences() {
@@ -65,7 +67,7 @@ final class AppStateRepository {
     }
 
     Set<String> currentWhitelistPackages() {
-        return parsePackageSet(preferences.getString(KEY_WHITELIST_PACKAGES,
+        return resolvePackageSet(preferences.getString(KEY_WHITELIST_PACKAGES,
                 preferences.getString(KEY_WHITELIST, "[]")));
     }
 
@@ -73,7 +75,7 @@ final class AppStateRepository {
         String taskId = taskName != null && taskName.equals(preferences.getString(KEY_TASK, ""))
                 ? preferences.getString(KEY_TASK_ID, taskIdForName(taskName)) : taskIdForName(taskName);
         String sessionId = start + "-" + (taskId.isEmpty() ? taskName : taskId);
-        String normalizedWhitelist = packagesAsJson(parsePackageSet(whitelistJson));
+        String normalizedWhitelist = packagesAsJson(resolvePackageSet(whitelistJson));
         preferences.edit()
                 .putBoolean(KEY_FOCUS_ACTIVE, true)
                 .putString(KEY_TASK, taskName == null ? "" : taskName)
@@ -96,7 +98,7 @@ final class AppStateRepository {
             if (source == null) source = object.optJSONArray("whitelist");
             Set<String> packages = new HashSet<>();
             if (source != null) {
-                for (int i = 0; i < source.length(); i++) addResolvedPackage(packages, source.optString(i));
+                for (int i = 0; i < source.length(); i++) packages.add(resolvePackage(source.optString(i)));
             }
             preferences.edit()
                     .putString(KEY_TASK, taskName)
@@ -142,6 +144,33 @@ final class AppStateRepository {
         } catch (JSONException exception) {
             return "";
         }
+    }
+
+    Set<String> resolvePackageSet(String json) {
+        Set<String> values = new HashSet<>();
+        try {
+            JSONArray array = new JSONArray(json == null ? "[]" : json);
+            for (int i = 0; i < array.length(); i++) {
+                String value = resolvePackage(array.optString(i));
+                if (!value.isEmpty()) values.add(value);
+            }
+        } catch (JSONException ignored) { }
+        return values;
+    }
+
+    String resolvePackage(String id) {
+        if (id == null || id.trim().isEmpty()) return "";
+        String value = id.trim();
+        String[] candidates;
+        if ("wps".equals(value)) candidates = new String[]{"cn.wps.moffice_eng", "cn.wps.moffice"};
+        else if ("recorder".equals(value)) candidates = new String[]{"com.android.bbksoundrecorder", "com.android.soundrecorder",
+                "com.google.android.apps.recorder", "com.sec.android.app.voicenote"};
+        else candidates = new String[]{LEGACY_PACKAGES.containsKey(value) ? LEGACY_PACKAGES.get(value) : value};
+        for (String candidate : candidates) {
+            try { context.getPackageManager().getApplicationInfo(candidate, 0); return candidate; }
+            catch (android.content.pm.PackageManager.NameNotFoundException ignored) { }
+        }
+        return candidates[0];
     }
 
     static String taskIdForName(String taskName) {

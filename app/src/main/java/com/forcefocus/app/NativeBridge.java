@@ -86,7 +86,9 @@ public final class NativeBridge {
 
     @JavascriptInterface
     public void setFocusModeActive(boolean active) {
-        state.setFocusActive(active);
+        boolean valid = state.preferences().getLong(AppStateRepository.KEY_START, 0L) > 0L
+                && state.preferences().getLong(AppStateRepository.KEY_END, 0L) > System.currentTimeMillis();
+        state.setFocusActive(active && valid);
         FocusDeadlineReceiver.schedule(activity);
     }
 
@@ -231,7 +233,7 @@ public final class NativeBridge {
 
     @JavascriptInterface
     public String getWhitelistAppInfo(String appId) {
-        Set<String> packages = AppStateRepository.parsePackageSet(new JSONArray().put(appId).toString());
+        Set<String> packages = state.resolvePackageSet(new JSONArray().put(appId).toString());
         String packageName = packages.isEmpty() ? appId : packages.iterator().next();
         JSONObject result = new JSONObject();
         try {
@@ -265,7 +267,7 @@ public final class NativeBridge {
 
     @JavascriptInterface
     public boolean launchWhitelistApp(String appId) {
-        Set<String> packages = AppStateRepository.parsePackageSet(new JSONArray().put(appId).toString());
+        Set<String> packages = state.resolvePackageSet(new JSONArray().put(appId).toString());
         return !packages.isEmpty() && launchPackage(packages.iterator().next());
     }
 

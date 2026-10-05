@@ -176,6 +176,8 @@ public final class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        FocusDeadlineReceiver.finishIfDue(getApplicationContext());
+        FocusDeadlineReceiver.schedule(getApplicationContext());
         if (webView != null) webView.post(() -> webView.evaluateJavascript(
                 "window.ForceFocusData&&window.ForceFocusData.onHostResume&&window.ForceFocusData.onHostResume();"
                         + "window.ForceFocusFocus&&window.ForceFocusFocus.onHostResume&&window.ForceFocusFocus.onHostResume();", null));

@@ -54,7 +54,7 @@ public final class FocusDeadlineReceiver extends BroadcastReceiver {
             record.put("endTime", end);
             record.put("actualFocusedSeconds", (end - start) / 1000L);
             record.put("localDate", FocusHistoryStore.localDateKey(end));
-            record.put("endReason", "completed");
+            record.put("endReason", "timer");
             record.put("whitelistClickCount", 0);
             new FocusHistoryStore(context).addCompletedRecord(record);
             state.setFocusActive(false);

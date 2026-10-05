@@ -21,6 +21,7 @@ public final class ForceFocusAccessibilityService extends AccessibilityService {
     public void onCreate() {
         super.onCreate();
         repository = new AppStateRepository(getApplicationContext());
+        FocusDeadlineReceiver.schedule(getApplicationContext());
         Log.i(TAG, "FF_A11Y onCreate");
     }
 
