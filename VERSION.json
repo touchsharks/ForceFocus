@@ -1,7 +1,7 @@
 {
   "applicationId": "com.forcefocus.app",
-  "versionName": "0.3.2-home",
-  "versionCode": 32,
+  "versionName": "0.3.3-home",
+  "versionCode": 33,
   "sourceModel": "standard-android-gradle-webview",
   "snapshotDate": "2026-10-05"
 }

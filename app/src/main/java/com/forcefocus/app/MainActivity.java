@@ -41,6 +41,7 @@ public final class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new AppStateRepository(getApplicationContext()).resetAfterRebootIfNeeded();
         createdAt = android.os.SystemClock.elapsedRealtime();
         Log.i("FF_PERF", "activity create elapsed=" + createdAt);
         configureWindow();

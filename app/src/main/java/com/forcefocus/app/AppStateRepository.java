@@ -72,6 +72,22 @@ final class AppStateRepository {
                 preferences.getString(KEY_WHITELIST, "[]")));
     }
 
+    void resetAfterRebootIfNeeded() {
+        int bootCount = -1;
+        try { bootCount = android.provider.Settings.Global.getInt(context.getContentResolver(), "boot_count", -1); }
+        catch (RuntimeException ignored) { /* Older/OEM devices use boot epoch fallback. */ }
+        long bootEpoch = System.currentTimeMillis() - android.os.SystemClock.elapsedRealtime();
+        int previousBoot = preferences.getInt("forcefocus_last_boot_count", -1);
+        long previousEpoch = preferences.getLong("forcefocus_last_boot_epoch", 0L);
+        long sessionStart = preferences.getLong(KEY_START, 0L);
+        boolean changed = bootCount >= 0 && previousBoot >= 0 ? bootCount != previousBoot
+                : previousEpoch > 0L && Math.abs(bootEpoch - previousEpoch) > 60000L;
+        boolean sessionPredatesBoot = sessionStart > 0L && sessionStart < bootEpoch - 2000L;
+        if (changed || sessionPredatesBoot) setFocusActive(false);
+        preferences.edit().putInt("forcefocus_last_boot_count", bootCount)
+                .putLong("forcefocus_last_boot_epoch", bootEpoch).commit();
+    }
+
     void saveFocusSession(String taskName, int minutes, long start, long end, String whitelistJson) {
         String taskId = taskName != null && taskName.equals(preferences.getString(KEY_TASK, ""))
                 ? preferences.getString(KEY_TASK_ID, taskIdForName(taskName)) : taskIdForName(taskName);

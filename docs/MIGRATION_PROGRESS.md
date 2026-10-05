@@ -1,3 +1,7 @@
+## Current priority: 0.3.3 safety release (2026-10-05)
+
+Reboot and package update discard unfinished focus without adding history or early-exit count. Native cancellation overrides stale WebView storage. Settings, uninstall/permission UI and Home launchers remain reachable. Emergency disable/recovery instructions: docs/verification/safety-0.3.3.md. Service enable-state stability remains pending phone verification. Same signer as 0.3.1/0.3.2; no uninstall needed for those versions.
+
 ## 0.3.2 无障碍独立开启排查（当前优先任务）
 
 用户已在新Gradle包上实机反馈服务连接后关闭，要求不依赖无障碍悬浮快捷按钮，导航强限制修改暂停。完整日志和dumpsys确认连接后在返回设置时销毁，服务已从Enabled列表消失，Crashed为空；未定位具体取消启用的调用者。

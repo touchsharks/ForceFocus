@@ -70,6 +70,12 @@ public final class FocusDeadlineReceiver extends BroadcastReceiver {
                 && !Intent.ACTION_BOOT_COMPLETED.equals(action)
                 && !Intent.ACTION_MY_PACKAGE_REPLACED.equals(action)
                 && !"android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED".equals(action)) return;
+        if (Intent.ACTION_BOOT_COMPLETED.equals(action) || Intent.ACTION_MY_PACKAGE_REPLACED.equals(action)) {
+            new AppStateRepository(context).setFocusActive(false);
+            schedule(context); // Cancels the stale deadline; never records an early exit or completion.
+            Log.i("FF_FOCUS", "unfinished session cancelled action=" + action);
+            return;
+        }
         finishIfDue(context);
         schedule(context);
     }

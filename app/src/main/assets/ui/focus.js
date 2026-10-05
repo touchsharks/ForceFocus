@@ -509,9 +509,14 @@
 
     function restoreSession() {
         let restored = null;
-        try { restored = parseStoredSession(bridgeCall("restoreFocusSession")); } catch (_error) { /* Try local copy. */ }
-        if (!restored) {
-            try { restored = parseStoredSession(localStorage.getItem(LOCAL_SESSION_KEY)); } catch (_error) { /* No local session. */ }
+        const nativeAvailable = window.NativeBridge && typeof window.NativeBridge.restoreFocusSession === "function";
+        if (nativeAvailable) {
+            try { restored = parseStoredSession(bridgeCall("restoreFocusSession")); } catch (_error) { /* Never revive a cancelled native session. */ }
+            if (!restored) {
+                try { localStorage.removeItem(LOCAL_SESSION_KEY); } catch (_error) { /* Native state is authoritative. */ }
+            }
+        } else {
+            try { restored = parseStoredSession(localStorage.getItem(LOCAL_SESSION_KEY)); } catch (_error) { /* Browser-only preview. */ }
         }
         if (restored) showFocus(restored, true);
     }
