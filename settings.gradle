@@ -4,14 +4,15 @@ pluginManagement {
         if (proxy) {
             maven {
                 url = uri("${proxy}/google")
+                allowInsecureProtocol = proxy.startsWith("http://127.0.0.1:")
                 content {
                     includeGroupByRegex("com\\.android(\\..*)?")
                     includeGroupByRegex("androidx(\\..*)?")
                     includeGroup("com.google.testing.platform")
                 }
             }
-            maven { url = uri("${proxy}/central") }
-            maven { url = uri("${proxy}/gradle") }
+            maven { url = uri("${proxy}/central"); allowInsecureProtocol = proxy.startsWith("http://127.0.0.1:") }
+            maven { url = uri("${proxy}/gradle"); allowInsecureProtocol = proxy.startsWith("http://127.0.0.1:") }
         }
         google()
         mavenCentral()
@@ -26,13 +27,14 @@ dependencyResolutionManagement {
         if (proxy) {
             maven {
                 url = uri("${proxy}/google")
+                allowInsecureProtocol = proxy.startsWith("http://127.0.0.1:")
                 content {
                     includeGroupByRegex("com\\.android(\\..*)?")
                     includeGroupByRegex("androidx(\\..*)?")
                     includeGroup("com.google.testing.platform")
                 }
             }
-            maven { url = uri("${proxy}/central") }
+            maven { url = uri("${proxy}/central"); allowInsecureProtocol = proxy.startsWith("http://127.0.0.1:") }
         }
         google()
         mavenCentral()

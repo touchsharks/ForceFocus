@@ -70,7 +70,8 @@ final class AppStateRepository {
     }
 
     void saveFocusSession(String taskName, int minutes, long start, long end, String whitelistJson) {
-        String taskId = taskIdForName(taskName);
+        String taskId = taskName != null && taskName.equals(preferences.getString(KEY_TASK, ""))
+                ? preferences.getString(KEY_TASK_ID, taskIdForName(taskName)) : taskIdForName(taskName);
         String sessionId = start + "-" + (taskId.isEmpty() ? taskName : taskId);
         String normalizedWhitelist = packagesAsJson(parsePackageSet(whitelistJson));
         preferences.edit()
@@ -100,6 +101,7 @@ final class AppStateRepository {
             preferences.edit()
                     .putString(KEY_TASK, taskName)
                     .putString(KEY_TASK_ID, taskId)
+                    .putString(KEY_SESSION_ID, preferences.getLong(KEY_START, 0L) + "-" + taskId)
                     .putString(KEY_WHITELIST_PACKAGES, packagesAsJson(packages))
                     .commit();
         } catch (JSONException ignored) {
