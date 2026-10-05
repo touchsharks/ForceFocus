@@ -44,6 +44,7 @@ public final class ForceFocusAccessibilityService extends AccessibilityService {
         CharSequence packageNameValue = event.getPackageName();
         String packageName = packageNameValue == null ? "" : packageNameValue.toString();
         Log.d(TAG, "FF_A11Y event package=" + packageName + " type=" + event.getEventType());
+        FocusDeadlineReceiver.finishIfDue(getApplicationContext());
         if (packageName.isEmpty() || repository == null || !repository.isFocusActive()) return;
         if (getPackageName().equals(packageName)) return;
         Set<String> allowed = repository.currentWhitelistPackages();
@@ -55,8 +56,9 @@ public final class ForceFocusAccessibilityService extends AccessibilityService {
         lastRelaunchAt = now;
         Log.w(TAG, "FF_A11Y blocked package=" + packageName + " task=" + repository.currentTaskId());
 
-        Intent intent = new Intent(this, MainActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+        Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
+        if (intent == null) { performGlobalAction(GLOBAL_ACTION_BACK); return; }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                         | Intent.FLAG_ACTIVITY_CLEAR_TOP
                         | Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 .putExtra("forcefocus_blocked_package", packageName);

@@ -76,6 +76,7 @@ public final class NativeBridge {
         long start = parseLong(startValue);
         long end = parseLong(endValue);
         state.saveFocusSession(task, minutes, start, end, whitelistJson);
+        FocusDeadlineReceiver.schedule(activity);
     }
 
     @JavascriptInterface
@@ -86,6 +87,7 @@ public final class NativeBridge {
     @JavascriptInterface
     public void setFocusModeActive(boolean active) {
         state.setFocusActive(active);
+        FocusDeadlineReceiver.schedule(activity);
     }
 
     @JavascriptInterface
