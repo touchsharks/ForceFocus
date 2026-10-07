@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = 'Stop'
 $adb = Join-Path $PSScriptRoot 'adb.exe'
 if (-not (Test-Path $adb)) { $adb = Join-Path (Split-Path $PSScriptRoot -Parent) 'adb.exe' }
 if (-not (Test-Path $adb)) { throw '请把这整个文件夹放到 platform-tools 里，再双击运行 start.bat。' }
@@ -15,11 +15,17 @@ function Snapshot($label) {
     Save-Adb @('shell','dumpsys','accessibility') ($label + '-accessibility.txt')
     & $adb shell dumpsys settings 2>&1 | Select-String -Pattern $keys | ForEach-Object { $_.Line } | Out-File -Encoding utf8 (Join-Path $out ($label + '-settings-writers.txt'))
     Save-Adb @('shell','dumpsys','activity','exit-info','com.forcefocus.app') ($label + '-process-exits.txt')
+    Save-Adb @('shell','dumpsys','activity','services','com.vivo.safecenter') ($label + '-safety-services.txt')
+    Save-Adb @('shell','cmd','appops','get','com.forcefocus.app') ($label + '-appops.txt')
+    Save-Adb @('shell','ps','-A') ($label + '-processes.txt')
 }
 $log = $null
 $watcher = $null
 try {
     Save-Adb @('shell','dumpsys','package','com.forcefocus.app') 'package-state.txt'
+    Save-Adb @('shell','dumpsys','package','com.vivo.safecenter') 'safety-package-state.txt'
+    Save-Adb @('shell','pm','list','packages','-i','com.forcefocus.app') 'install-source.txt'
+    Save-Adb @('shell','dumpsys','-l') 'available-system-services.txt'
     Save-Adb @('shell','getprop','ro.product.model') 'device-model.txt'
     Save-Adb @('shell','getprop','ro.build.display.id') 'system-build.txt'
     Save-Adb @('shell','getprop','ro.build.version.release') 'android-version.txt'
@@ -53,17 +59,7 @@ try {
     Write-Host "`n第 3 步：仍保持未专注，打开微信，等待约 10 秒，再返回 ForceFocus。"
     [void](Read-Host '完成后按回车')
     Snapshot '03-wechat-without-focus'
-    $packageText = Get-Content (Join-Path $out 'package-state.txt') -Raw
-    $enabledNow = (& $adb shell settings get secure enabled_accessibility_services | Out-String)
-    if ($packageText -match 'versionName=0\.3\.3-home' -and $enabledNow -match 'com\.forcefocus\.app/') {
-        Snapshot '04-before-focus-test'
-        Write-Host "`n第 4 步：服务目前仍开启，可以补测专注中的切换。"
-        Write-Host '开始一个专注，从桌面打开微信，等待约 10 秒。异常时双击 emergency-stop.bat 停用服务。'
-        [void](Read-Host '完成或中止后按回车')
-        Snapshot '04-wechat-during-focus'
-    } else {
-        Write-Host "`n无障碍已经关闭，或尚未确认安全版：自动跳过专注测试，先诊断基础开启问题。"
-    }
+    Write-Host "`n本轮仅排查权限开启，不进入专注，不修改任何手机管家开关。"
     Snapshot '05-final'
 } finally {
     if ($watcher) { Stop-Job $watcher; Receive-Job $watcher 2>&1 | Out-File -Encoding utf8 (Join-Path $out 'watcher-status.txt'); Remove-Job $watcher }
