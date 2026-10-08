@@ -1,6 +1,6 @@
-# 仓库清理建议（待用户决定）
+# 仓库清理记录与后续建议
 
-当前使用基准为 0.3.3-home / versionCode 33。本清单只提出整理方案，未执行删除或移动；不改源码和冻结视觉。检查基准提交 e90008bc8a2dc78c622934fae7a2f5dfa44160e1。
+当前使用基准为 0.3.3-home / versionCode 33。已完成 3 个重复文件删除及 229 个原始图片补齐；下列归档建议尚未执行。不改源码和冻结视觉。检查基准提交 e90008bc8a2dc78c622934fae7a2f5dfa44160e1。
 
 ## 必须保留
 
@@ -32,11 +32,11 @@
 
 保留 docs/PERFORMANCE_UPDATE.md，属于已有性能与行为改动说明，不因权限问题解决而作废。
 
-## 可以删除的少量重复文件（待同意）
+## 已删除的重复文件
 
 | 文件 | 删除前提/影响 |
 |---|---|
-| tools/capture-accessibility-windows.bat | 已有 tools/accessibility-diagnostics/ 替代；先更新历史文档引用 |
+| tools/capture-accessibility-windows.bat | 已有 tools/accessibility-diagnostics/ 替代；历史文档引用已更新 |
 | docs/verification/signature-0.3.1.txt | Git blob 与当前 0.3.3 签名文件完全相同；保留历史提交和当前签名记录即可 |
 | docs/verification/signature-0.3.2.txt | 同上 |
 
@@ -44,8 +44,8 @@
 
 `tools/build_apk.py` 现在只有调用 Gradle 的功能，不再是旧 APK 二进制补丁脚本。可以保留兼容旧入口；若统一直接运行 Gradle，可删除并同步修改 docs/MIGRATION_ACCEPTANCE.md 中的描述。tools/build.sh 也只是便捷入口，暂时保留。
 
-## 仍需补齐的保存项
+## 资源保存状态
 
-GitHub 中缺少 229 个图片文件，且本树没有可安装 APK。它们是当前恢复依赖，不属于无用文件。完整保存当前版本，应另安排上传冻结图片和已验证 APK（例如 Release 附件），并继续保留对应签名密钥。不要把大素材、旧版 APK 或密钥未经检查全部删除。
+GitHub 已包含全部 229 个原始图片与 17 个前端代码/数据文件，普通克隆即可获得完整素材。可安装 APK 尚未作为 Release 附件上传；当前使用 APK 和私有签名密钥应继续保存，签名密钥不得提交公开仓库。
 
 本次不重写 Git 历史；历史提交仍可用于追溯。删旧文档仅整理当前目录，不会显著减少仓库体积。

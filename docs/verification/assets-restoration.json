@@ -1,0 +1,12 @@
+{
+  "sourceCommit": "dcf3297d2faf48ebb09dc400b834946b070297f7",
+  "resourceCount": 246,
+  "imageCount": 229,
+  "sha256ManifestMatch": true,
+  "remoteGitBlobMatch": true,
+  "deletedFiles": [
+    "tools/capture-accessibility-windows.bat",
+    "docs/verification/signature-0.3.1.txt",
+    "docs/verification/signature-0.3.2.txt"
+  ]
+}

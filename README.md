@@ -3,10 +3,9 @@
 当前使用基准：**0.3.3-home（versionCode 33）**，applicationId `com.forcefocus.app`。
 标准 Android Gradle 工程，现有 WebView HTML/CSS/JS 与素材继续作为唯一界面。首页、侧边栏、专注页、日历和图鉴的冻结视觉保持不变。
 
-## 当前验收范围
+## 安装与验收
 
-已反馈通过：无障碍从系统设置开启并保持、无需无障碍悬浮快捷按钮、白名单放行、非白名单返回专注页面、当前任务限制场景、重启后回到常规首页。
-这些结果不代表所有设备、性能指标、每周提前结束限制及所有系统退出路径都已完成验收。
+功能维护包含无障碍服务、按任务生效的白名单和重启安全退出。权限稳定、任务限制、性能与系统退出路径应分别执行运行验收；静态检查不能替代实机检查。
 
 安装更新优先通过手机文件管理器调用系统安装界面，使用同 applicationId、同签名 APK 覆盖安装，保留数据。ADB 保留用于诊断；安装路径作为单独测试条件记录。详见 [安装与权限验收流程](tools/accessibility-diagnostics/README.md)。
 
@@ -26,13 +25,12 @@
 
 ## 恢复资源与构建
 
-**GitHub 当前不含 229 个冻结图片文件。仅克隆仓库不足以完整构建。**
-源码、17 个前端代码/数据文件、Gradle Wrapper 和校验工具已在仓库；恢复图片需保存的 `ForceFocus-frozen-image-assets-0.2.27.zip` 或包含对应素材的原 APK。资源恢复标识见 [历史迁移记录](docs/MIGRATION_PROGRESS.md)。
+**GitHub 已包含全部 246 个冻结资源：17 个前端代码/数据文件和 229 个原始图片。克隆后无需再寻找聊天中的素材包。**
+图片以普通 Git 文件保存，不依赖 Git LFS 下载。完整性验证见 [资源补齐记录](docs/verification/assets-restoration.json)。
 
 安装 JDK 17、Android SDK 35 / Build Tools 35.0.0 后：
 
 ```bash
-python3 tools/restore_frozen_assets.py /path/to/ForceFocus-frozen-image-assets-0.2.27.zip
 ./gradlew :app:assembleDebug
 python3 tools/verify_apk.py app/build/outputs/apk/debug/app-debug.apk
 ```
@@ -41,4 +39,4 @@ python3 tools/verify_apk.py app/build/outputs/apk/debug/app-debug.apk
 
 ## 历史说明
 
-`docs/MIGRATION_PROGRESS.md` 和旧版排查文件包含当时的未完成状态，按历史记录阅读，当前入口以本 README 为准。仓库保留历史提交，本次整理不删除文件、不改应用代码、不产生新 APK。
+`docs/MIGRATION_PROGRESS.md` 和旧版排查文件包含当时的未完成状态，按历史记录阅读，当前入口以本 README 为准。仓库保留历史提交，本次已删除 3 个被替代或重复的文件并补齐图片；不改应用代码、不产生新 APK。
