@@ -11,8 +11,8 @@ android {
         applicationId "com.forcefocus.app"
         minSdk 23
         targetSdk 35
-        versionCode 33
-        versionName "0.3.3-home"
+        versionCode 34
+        versionName "0.3.4-home"
     }
 
     buildTypes {

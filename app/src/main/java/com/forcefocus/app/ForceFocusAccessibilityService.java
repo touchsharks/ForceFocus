@@ -88,7 +88,8 @@ public final class ForceFocusAccessibilityService extends AccessibilityService {
                 escapePolicy != null && escapePolicy.allows(packageName, event), allowed, imePackages);
         Log.d(TAG, "FF_A11Y decision=" + decision + " package=" + packageName
                 + " class=" + className + " type=" + event.getEventType()
-                + " window=" + event.getWindowId() + " task=" + repository.currentTaskId());
+                + " window=" + event.getWindowId() + " task=" + repository.currentTaskId()
+                + " session=" + repository.currentSessionId() + " whitelistCount=" + allowed.size());
         if (!"block-not-in-current-task".equals(decision)) return;
 
         long now = SystemClock.elapsedRealtime();
